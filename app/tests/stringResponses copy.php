@@ -1,0 +1,686 @@
+<?php 
+
+$stringResponses = " 
+B B B B1 
+B A C B1 
+C C C C2 
+B C C C1 
+D C C A2 
+B C B B2 
+A B C B1 
+B C A B1 
+A C C C1 
+A A C A2 
+A A B A2 
+B B C B2 
+A C B B1 
+C C A C1 
+B A A A2 
+A B A A2 
+B A B B1 
+A B B B1 
+A A A A1 
+D A A A1 
+D A C A1 
+C B C C1 
+A D A A1 
+A C A A2
+C C C C2
+B B C B2
+B C C C1
+A A B A2
+B A C B1
+C B C C1
+B B A B1
+A C B B1
+D D D A1
+A B A A2
+D C A A1
+B A A A2
+B C A B1
+C A B B1
+C C B C1
+A A A A1
+D C D A1
+C B A B1
+A A D A1
+C A C C1
+A C C C1
+B C B B2
+A A C A2
+B B B B1
+D C C A2
+A B C B1
+C C A C1
+B A B B1
+A B B B1
+D A A A1
+D A C A1
+A D A A1
+D A B A1
+B A D A1
+C C D A2
+D A D A1
+A C D A1
+C B B B2
+A B D A1
+A D D A1
+D B B A1
+D D B A1
+B D A A1
+C A A A2
+D B C A1
+A A A A D D A1
+A B B C A D A2
+A A A A D A A1
+C B B C B A B2
+B C C B A A B1
+C B C C B A C1
+B B B C D D A2
+C A A B D D A2
+A A B C A D A2
+A C B A B A B1
+B C C C B C C1
+C C B C B A C1
+B B D B B A B1
+A A A A A D A1
+B C A B A A B1
+A C A C A A A2
+B C B C A A B1
+C B B C B C B2
+B C A B B A B1
+A A B A A A A1
+C C C C A B C1
+A C B C B A B1
+C C A C C A C1
+B C A A A A A2
+A C A A A D A2
+C C B C A A B2
+A B B C B C B2
+C B B B A D B1
+C B B C C D B2
+C B C C B C C1
+C B A C D D A2
+A A B B D A A2
+A A A C D D A2
+C B C C C C C1
+C C B C B B B2
+B B B B A A B1
+A C B A D D A2
+B C A A B C B1
+B C D A A D A2
+C C C C B C C1
+A C C B A A B1
+C C C C D D A2
+B C B C A C C1
+B B B C C B B2
+C C C C C C C2
+B C A C B C C1
+C B C C A B C1
+B C C B B C B2
+B C C C C B C1
+B C C C B A C1
+A C B B B A B1
+B B A D B A A2
+B B C B B A B1
+B C B D D A A2
+B C C B D A B1
+B C B C B A B2
+B C B C A D B1
+A C A B D D A2
+B A B B D D A2
+A A B B B A B1
+B A B C B A B1
+A B B B A A B1
+C A A C B A B1
+A C B B A A B1
+C C C C A C C1
+A A C A A A A1
+C C C C B A C1
+A A B A C A A2
+A B A B B A B1
+B B C B A A B1
+C B C B B A B2
+A C A A A A A1
+A A D A A D A1
+B C C B D C B2
+C A B B A A B1
+C C C C C A C1
+B C B C C D B2
+A A D A D D A1
+B C C C A A B2
+B C C B B D B2
+A A A D A D A1
+A C A B A A A2
+A C C B B A B1
+A C B C A A B1
+C B A C B D B1
+B B B C A A B1
+C B B C B B B2
+B B C B B C B2
+B D B C B A B1
+A C C A A D A2
+A B A B A A A2
+B C A A B A B1
+C A B C A A B1
+C C C B A A B2
+B B C C B A B2
+B C C C B B B2
+B B C B C B B2
+D A D A D D A1
+C B B C C C C1
+A C A C A D A2
+D A D D D D A1
+A C B B D D A2
+B C B C C B B2
+A B C B A B B1
+B D B A D A A2
+B C B C D D A2
+C C B C B C C1
+B C C B A B B2
+B A B A A D A2
+B A C C B A B1
+C C C B C A C1
+B C C A A B B1
+A A B C B B B1
+B A A C A A A2
+B D A C D A A2
+B B A C D D A2
+B C B B A A B1
+C B B B C A B2
+B D D A D D A1
+A A B B A A A2
+A C B B A D A2
+C A B B B C B2
+A A D B D D A1
+A A A A B B A2
+A A B A A D A2
+B A B B A D A2
+A A B B D D A2
+A A B A D D A2
+A A A B A D A2
+C C B C C C C1
+B A B A A A A2
+B B A B B A B1
+C C A A A B B1
+B C B A A A B1
+B B A B A A B1
+C C C B B C C1
+C A B B A D A2
+A C C A B A B1
+B C A B D C B1
+A A A A B C A2
+B A A B D C A2
+C C A C D B B2
+C C A C B A B2
+C A A A B A A2
+B C A B B C B2
+C A B A B A B1
+C C C C B B C1
+A A A A A A A1
+C B B C A D B1
+C A B C C A B2
+A C C B A B B1
+A C B A C D A2
+A A B B A D A2
+A D A A C B A2
+A C A C A C B1
+B B C C C C C1
+B A B A B A B1
+B C A B B B B1
+B A C B A D A2
+A A A C C A A2
+B C A C B B B2
+A A B D C A A2
+B C B B B D B2
+A C C C B D B2
+B A B C D D A2
+C C A C B D B2
+A A B C D D A2
+C C A B A A B1
+A B B A A D A2
+C B C B B B B2
+B B A C A D A2
+A C A C B A B1
+B A B A D D A2
+B B C C C B B2
+B B B B B A B1
+A C B C A D A2
+A B B A C A B1
+A A B C B A B1
+A B B A A A A2
+B C A C A A B1
+B A B B A A B1
+B B B C C A B2
+B B C B A D B1
+B C B B A B B1
+B B C C B C B2
+B C B C B C B2
+B C A C A D A2
+C C B C A D B2
+A C C C B A B2
+A A A C A D A2
+C C B B A D B1
+D B B C B A B1
+B B B B A D B1
+A B B A B A B1
+C C A C A A B1
+C A B B D A A2
+A A B C D A A2
+B C C B C A C1
+B A B A D A A2
+B A A B D D A2
+C C C C D B C1
+B C B A D B B1
+B C A D A A A2
+B A D B A A A2
+C B A B C C C1
+B B C C D D A2
+A A B C A A A2
+B C B C A B B2
+A A B A D B A2
+A C B C C A B2
+C C B B C A C1
+B C B A A D A2
+B A C C A B B1
+A C A B C C B2
+B C A D C A A2
+A B B C D A A2
+B B B D B D A2
+B A A D D D A1
+A A C D D D A1
+A A A C A A A1
+B C B B B A B1
+C B C C B B B2
+B B B C C C B2
+A A A B A A A1
+C B A B B C B2
+A B B C C C C1
+A A A D A A A1
+A C A A D A A2
+C D B D D A A2
+B B A A A A A2
+B D D D A B A1
+A C B A D A A2
+A C A D D A A2
+B C A C D D A2
+A C B A A D A2
+A A A A B A A1
+A A C A B A A2
+A B C B A C B1
+A A A D D D A1
+A A B D D D A1
+C C C C A D C1
+B C B B A D B1
+B C A B B D B1
+B A B C C A B1
+B C A B D D A2
+B B B A A A B1
+A B D C A A A2
+A A D A D A A1
+A C A C B C B2
+B A B C B C B2
+A B B C B A B1
+B C A D B A A2
+B C C D D D A1
+A C A B B A B1
+B A D B A D A2
+A A C C B A B1
+B A A A D A A2
+D D B A A D A1
+A A A B D D A2
+A A B D D A A2
+B C A B A B B1
+C B B C D D A2
+D D D D D D A1
+A A A A C A A1
+B B B C B C B2
+C D A D C C A2
+A C B A A B B1
+B D A A A A A2
+A D D D D D A1
+C C C C A A C1
+C C B B B C B2
+C C C C D C C2
+A C C B D A B1
+C C B C D D A2
+B C C C C C C1
+A C C B C A B2
+B D B A D D A1
+A C B C D D A2
+B A B A C D A2
+B D B B A D A2
+C B C B C B B2
+C B C C C B C1
+B C C B A C C1
+A A B D A B A2
+B C A C B A B1
+B A B C D C B2
+A C C C A B B2
+C C B B D D A2
+B C C B C B B2
+B A A A A D A2
+B A B A B A B1 
+B C A B B A B1 
+B C C B B D B2 
+C C C B A A B2 
+A C C B A A B1 
+B C A B B B B1 
+A A A A D A A1 
+B A C B A D A2 
+C B B C B C B2 
+A A A C C A A2 
+B C A C B B B2 
+B C C C B A C1 
+A A B D C A A2 
+B C C C B C C1 
+B C B B B D B2 
+B C B C A A B1 
+A C A B A A A2 
+B C A A A A A2 
+A C B B D D A2 
+C C C C C C C2 
+A C C C B D B2 
+C C B C B A C1 
+B C C C A A B2 
+A C B B B A B1 
+B A B C D D A2 
+C C A C B D B2 
+A A B C D D A2 
+C C A B A A B1 
+B C C C B B B2 
+C C A C B A B2 
+C B C C C C C1 
+A B B A A D A2 
+C B C B B B B2 
+B B A C A D A2 
+A C A C B A B1 
+B A B A D D A2 
+B B C C C B B2 
+B B B B B A B1 
+B B C B A A B1 
+C B C C B A C1 
+A C B C A D A2 
+A B B A C A B1 
+A A B C B A B1 
+A C B C A A B1 
+A B B A A A A2 
+B C A C A A B1 
+B A B B A A B1 
+B C B C B A B2 
+B B B C C A B2 
+A C A A A A A1 
+B A B B A D A2 
+B B C B A D B1 
+B C B B A B B1 
+A A A A A A A1 
+B B C C B C B2 
+B C B C D D A2 
+B C B C B C B2 
+B C A C A D A2 
+A A C A A A A1 
+C C B C A D B2 
+A C C C B A B2 
+A A A C A D A2 
+C C B B A D B1 
+D B B C B A B1 
+B B B B A D B1 
+A B B A B A B1 
+C C A C A A B1 
+C A B B D A A2 
+A A B C D A A2 
+A C B B A A B1 
+B B A A A2
+C C A A B1
+A C A A A2
+C B A A A2
+B A A A A2
+C C A B B2
+C B A D A2
+A C A D A2
+A A A D A1
+A B B A A2
+C C C C C2
+B C A A A2
+B B A D A2
+C B C A B2
+A D A A A1
+B B A B B1
+B C C A B2
+A A A A A1
+C A A D A2
+A B A A A2
+C C C A C1
+D C A A A2
+C B A C B2
+A D A D A1
+C B C B B2
+C B C D B1
+C C B A B2
+B C B A B1
+B A A D A2
+A C B B B1
+B A D D A1
+C C B B B2
+C C A D A2
+A B D A A2
+D A A A A1
+D D B B A1
+D A B D A1
+A A B B A2
+B A C B B1
+B A B C B1
+A D B D A1
+D A B C A2
+A B B C B1
+C C B D B1
+A B B B B1
+A C C B B2
+A A D D A1
+A B C C B2
+D C B B B1
+C B C C C1
+A A B C A2
+B A B B B1
+A A A B A2
+A B A D A2
+C B B C B2
+C C B C C1
+A A B A A2
+D B B C B1
+A C B C B2
+A B A B A2
+D D B C A1
+B B B B B1
+B A A C A2
+C B B B B2
+B B B C B2
+A D C B A2
+B C A B B1
+B C B B B2
+D A B B A2
+B B A C B1
+A C C C C1
+B A A B A2
+D A A B A2
+B C C B B2
+A B A C A2
+D D A B A1
+B D C D A1
+A A C C B1
+B C C C C1
+A A A C A2
+B B C B B2
+B C A C B2
+B B C C B2
+B D A B A2
+A C A C B1
+C B A B B1
+B D B A A2
+B A C C B2
+D D D D A1
+A B C B B1
+A D D D A1
+D A A D A1
+A B B D A2
+D D A D A1
+A C A B A2
+A A B D A2
+D D A A A1
+B B B A B1
+D D B A A1
+C A C A B1
+A D B A A2
+A D A B A2
+C A A A A2
+B A B A A2
+B D A A A2
+B C B C B2
+C C A C C1
+A D A C A2
+B A C D A2
+B B C A B1
+A A D A A1
+A B C A A2
+D D C D A1
+A D B B A2
+A A C B A2
+B A C A A2
+C A B A A2
+C C C B C1
+B A B D A2
+A C B D A2
+D A D D A1
+C B B A B1
+D A B A A2
+A C B A A2
+B C A D A2
+B B B D B1
+A A C A A2
+C A A B A2
+B D A D A1
+C B B D B1
+D C A B A2
+A C C A B1
+D B A C A2
+D B A D A1
+D C C A A2
+D C B A A2
+D B B A A2
+C A C C C1
+D A D A A1
+D B B B B1
+D C C C B2
+C D B C B1
+D B A A A2
+A D D A A1
+D D A C A1
+C A C B B2
+B D B C B1
+C A A C B1
+C C D D A1
+D A C A A2
+D A C B A2
+D D C A A1
+D D B D A1
+C C C A B2
+D C A A A2 
+C B B D B1 
+A A A A A1 
+C B B A B1 
+B B C B B2 
+B C A A A2 
+A B A A A2 
+C C C C C2 
+C C A A B1 
+C C C B C1 
+A A B A A2 
+C C B B B2 
+D C A B A2 
+C B A A A2 
+C C A B B2 
+A B B A A2 
+C B C B B2 
+A A B D A2 
+A C A D A2 
+A B A D A2 
+A B C A A2 
+C B A B B1 
+B C B A B1 
+C A A A A2 
+A C A A A2 
+B B A A A2 
+C C C A C1 
+B B A D A2 
+A B A B A2 
+A C B A A2 
+A C C A B1 
+A A A D A1 
+D B A C A2 
+B A A B A2 
+C B C A B2 
+D B A D A1 
+C C A D A2 
+D C C A A2 
+A D A D A1 
+D C B A A2 
+D A A A A1 
+A A C A A2 
+D B B A A2 
+A A B C A2 
+A B A C A2 
+B B B A B1 
+D B B C B1 
+B C B C B2 
+A D B B A2 
+D A B B A2 
+A B C C B2 
+A A C B A2 
+A B B C B1 
+A A B B A2 
+B A B A A2 
+A A A B A2 
+C B B C B2 
+A B B B B1 
+A B B D A2 
+A D A B A2 
+D D B A A1 
+B B C C B2 
+A C B B B1 
+A D B A A2 
+B C C B B2 
+D A B A A2 
+B B B B B1 
+A C A B A2 
+D A B C A2 
+B C C C C1 
+B A A A A2 
+A A A C A2 
+D A B D A1 
+C A C C C1 
+D A D A A1 
+A C C B B2 
+B A A C A2 
+A C B C B2 
+D D A B A1 
+D B B B B1 
+B C A C B2 
+B A B B B1 
+C B A C B2 
+D C C C B2 
+A C A C B1 
+B B A C B1 
+B A C C B2 
+B A C A A2 
+A D A A A1 
+D A A B A2 
+B A B C B1 
+B D A B A2 
+B C A B B1 
+C D B C B1 
+C B C C C1 
+D B A A A2 
+C A A B A2 
+D D A A A1 
+B B B C B2 
+\n\n";

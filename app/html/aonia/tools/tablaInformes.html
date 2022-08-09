@@ -1,0 +1,119 @@
+<link href="/public/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<script type="text/javascript" src="/public/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/public/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="/public/js/utils.js"></script>
+
+<section id="tests" class="card-body mt-2 "></section>
+<style>
+    table {
+        /*table-layout: fixed;*/
+        width: 100%;
+        border-collapse: collapse; 
+        border-radius: 1em;
+        overflow: hidden;
+        align-items: center;
+        text-align: center;
+        vertical-align: middle;
+        
+    }
+    table td {
+        word-wrap: break-word;         /* All browsers since IE 5.5+ */
+        overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+        align-items: center;
+        text-align: center;
+        vertical-align: middle;
+    }
+    table tr {
+        align-items: center;
+        text-align: center;
+        vertical-align: middle;
+    }
+    table th {
+        align-items: center !important;
+        text-align: center !important;
+        vertical-align: middle !important;
+        padding-right: 10px !important;
+        padding-left: 10px !important;
+
+    }
+    
+</style>
+<script>
+    function generateTable(tests) {
+        console.log(tests);
+        let testsSection = document.getElementById("tests");
+        testsSection.innerHTML = ""; 
+        let html = "";
+        if(!tests || tests.length === 0){
+            html = `<p>No se ha encontrado tests para este usuario</p>`; 
+        }else{
+            // Aqui nombre del Area 6
+            html += 
+            `
+            <table id="tablaInformes" class="table table-sm">
+            <thead>
+            <tr style="background: linear-gradient(to bottom, #4f6bf5 , #8e86f7); color:#ffffff; text-align: center; align-items: center; vertical-align: middle">
+                <th scope="col">Nº</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Información</th>
+                <th scope="col">Comunicación</th>
+                <th scope="col">Creación de contenidos digitales</th>
+                <th scope="col">Seguridad</th>
+                <th scope="col">Resolución de problemas</th>
+                <th scope="col">Prueba</th>
+                <th scope="col">Nivel global</th>
+                <th scope="col">Test</th>
+            </tr>
+            </thead>
+            <tbody>
+            `;
+            let index = 0
+            for (let index = 0; index < tests.length; index++) {
+                const test = tests[index];
+                // Aqui nombre del area 6
+                html += `
+                <tr>
+                    <th scope="row">${index+1}</th>
+                    <td>${test["fecha"]}</td>
+                    <td class="text-capitalize">${parseMarkToString(test["area_1"])}</td>
+                    <td class="text-capitalize">${parseMarkToString(test["area_2"])}</td>
+                    <td class="text-capitalize">${parseMarkToString(test["area_3"])}</td>
+                    <td class="text-capitalize">${parseMarkToString(test["area_4"])}</td>
+                    <td class="text-capitalize">${parseMarkToString(test["area_5"])}</td>
+                    <td class="text-capitalize">${parseMarkToString(test["area_6"])}</td>
+                    <td class="text-capitalize font-weight-bold">${parseMarkToString(test["finalmark"])}</td>
+                    <td><a href="/informe/${test["id"]}">Ver informe</a></td>
+                </tr>
+                `;
+            }
+            html += 
+                `
+            </tbody>
+            <tr style="background: linear-gradient(to bottom, #4f6bf5 , #8e86f7); color:#ffffff"> 
+                <th scope="col"><br></th> 
+                <th scope="col"></th> 
+                <th scope="col"></th> 
+                <th scope="col"></th> 
+                <th scope="col"></th> 
+                <th scope="col"></th> 
+                <th scope="col"></th> 
+                <th scope="col"></th> 
+                <th scope="col"></th> 
+                <th scope="col"></th> 
+            </tr>
+        </table>
+            `;
+        }
+
+        testsSection.insertAdjacentHTML("afterbegin", html);
+
+
+        $('#tablaInformes').DataTable( {
+            "language": {
+                "url": "/public/datatable/Spanish.json"
+            }
+        } );
+        document.getElementById("tablaInformes").closest("div").className.add("table-responsive");
+
+    }
+</script>

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="card-body">
+
+	{% if user %}
+
+		<div class="row">
+			<div class="col">
+				<input type="text" class="form-control" id="userId" placeholder="Introduce el usuario a buscar">
+			</div>
+			<div class="col">
+				<button type="button" class="btn btn-success" onclick="searchUser()">Buscar</button>
+			</div>
+		</div>
+		{% include "tools/tablaInformes.html" %}
+
+		<script>
+			{% include "tools/send.js" %}
+			
+			function searchUser() {
+				let userIdElement = document.getElementById("userId"); 
+
+				send({userId:userIdElement.value}, "searchUser", (tests) =>{
+					generateTable(tests); 
+				});
+			}
+
+		</script>
+
+	{% else %}
+
+	{% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block main %}
+<div class="card-body">
+	<p>
+		Bienvenido a tu espacio personal de evaluación de Competencias Digitales. A través del test de Aonia Educación podrás conocer tu nivel de Competencia digital actual, así como tu progreso conforme vayas evaluándote en los próximos meses. A continuación puedes hacer un nuevo test, ver tus informes anteriores y consultar los gráficos de tu último test y tu evolución.
+	</p>
+	{% if tests %}
+
+	<a href="/test" class="btn btn-primary">Hacer nuevo test</a>
+	<section class="card-body mt-2" id="tests">
+		<table class="table table-sm">
+			<thead>
+			  <tr>
+				<th scope="col">#</th>
+				<th scope="col">Fecha</th>
+				<th scope="col">Test</th>
+			  </tr>
+			</thead>
+			<tbody>
+			{% for test in tests %}
+			  <tr>
+				<th scope="row">{{loop.index}}</th>
+				<td>{{test['fecha']}}</td>
+				<td><a href="/informe/{{test['id']}}">Ver informe</a></td>
+			  </tr>
+			{% endfor%}
+			</tbody>
+		  </table>
+	</section>
+	{% else %}
+		<p>Aun no has hecho ningún test. ¿Por qué no haces el primero ahora? <a href="/test" class="btn btn-primary ml-5">Hacer mi primer test</a></p>
+		
+	{% endif %}
+	
+</div>
+{% endblock %}

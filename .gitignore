@@ -1,0 +1,6 @@
+app/config/databaseCredentials.config.php
+app/config/email.config.php
+
+
+*_dev*
+*_prod*

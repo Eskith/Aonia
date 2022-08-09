@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block javaScriptStart %}
+{% if isInform and mark %}
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script src="/public/js/Chartjs-utils.js"></script>
+	<script	script type="text/javascript" src="/public/js/utils.js"></script>
+{% endif %}
+{% endblock %}
+{% block main %}
+<div class="card-body" style= "padding-top: 10%;">
+	{% if not isInform %}
+		<h2>Informes</h2>
+		{% if tests %}
+
+		{% include "tools/tablaInformes.html" %}
+
+		<script>
+			let tests = JSON.parse(`{{tests | raw}}`);
+			generateTable(tests); 
+		</script>
+		{% else %}
+			<p>Aun no has hecho ningún test. ¿Por qué no haces el primero ahora? <a href="/test" class="btn btn-primary ml-5">Hacer mi primer test</a></p>
+		{% endif %}
+	{% else %}
+		<a class="btn btn-primary btn-sm" style="background: linear-gradient(to bottom, #4f6bf5 , #8e86f7); border-radius: 20px; width: 120px; border-style:hidden" href="/" >Volver al inicio</a>
+		<section id="informe" style="margin-top:5%">
+		<h1>Resultado del Test</h1>
+		{% if mark %}
+		<!--Llamamos al html del resultado del infome-->
+			{% include "includes/resultadoInforme.html" %}
+		{% else %}
+			<p>Vaya... Parece que no se ha encontrado el informe que buscaba, ¿Por qué no hace uno nuevo? <a href="/test" class="btn btn-primary ml-5">Hacer otro test</a></p>
+		{% endif %}
+		</section>
+	{% endif %}
+	
+	
+</div>
+{% endblock %}

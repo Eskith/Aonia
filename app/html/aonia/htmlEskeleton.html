@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		TestCDD - Aonia
+	</title>
+	<!-- metaTags -->
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<link rel="icon" href="/public/img/ICO.jpg">
+	{% block bootstrap_css %}
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+	<link rel="stylesheet" href="/public/css/CSSlorena.css">
+
+	{% endblock %}
+    {% block jquery %}
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    {% endblock %}
+    {% block bootstrap_js %}
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    {% endblock %}
+
+    {% block css %}{% endblock %}
+    {% block javaScriptStart %}{% endblock %}
+	<style>
+		@media (min-width: 1620px){
+			.container {
+				max-width: 1400px;
+			}
+		}
+	</style>
+</head>
+
+
+<script>
+	function showNotification(message, title, type) {
+	let id= Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10);
+	switch (type.toLowerCase()) {
+		case 'success':
+			title = title ? title : "Nueva notificación";
+			style = `color: #28a745;`;
+			break;
+		case 'error':
+			title = title ? title : "Error";
+			style = `color: #dc3545;`;
+			break;
+		
+		default:
+			title = title ? title : "Nueva notificación";
+			style = '';
+			break;
+	}
+    let html = `
+	<div class="toast" id="${id}" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3500" data-autohide="true">
+      <div class="toast-header">
+        <!--<img src="..." class="rounded mr-2" alt="...">-->
+        <strong class="mr-auto" style="${style}">${title}</strong>
+        <!--<small class="text-muted">just now</small>-->
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        ${message}
+      </div>
+    </div>
+    `;
+
+    document.getElementById("notifications").insertAdjacentHTML("beforeend", html);
+	$(`#${id}`).toast('show');
+
+}
+$('.toast').toast({delay:1500});
+</script>
+<body style="background-image: url('public/img/Fondo-Login-gris-lineas-hd.png'); color: #5263cc !important ">
+	
+
+	{% block html %}{% endblock %}
+	<div aria-live="polite" aria-atomic="true" style="position: inherit; min-height: 200px;">
+		<!-- Position it -->
+		<div style="position: fixed; top: 10em; right: 2.5em;" id="notifications">
+
+		</div>
+	</div>
+</body>
+</html>

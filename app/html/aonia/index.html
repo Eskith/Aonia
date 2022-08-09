@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+{% block main %}
+<style>
+#ultimoTestSection h2{
+	padding-top: 5%;
+	padding-bottom: 5%;
+}	
+#ultimosTestSection h2{
+    padding-top: 5%;
+	padding-bottom: 5%;
+}
+
+#ultimoTest{
+    padding-left: 5%; 
+	padding-right: 20%;
+}
+#porAreas{
+    padding-left: 5%; 
+	padding-right: 20%;
+	padding-bottom: 3%;
+}
+#ultimosTest{
+    padding-left: 5%; 
+	padding-right: 20%;
+}
+#areaGrafico{
+	width: auto;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="/public/js/Chartjs-utils.js"></script>
+<script	script type="text/javascript" src="/public/js/utils.js"></script>
+<div class="card-body">
+	<p>
+		Bienvenido a tu espacio personal de evaluación de Competencias Digitales. A través del test de Aonia Educación podrás conocer tu nivel de Competencia digital actual, así como tu progreso conforme vayas evaluándote en los próximos meses. A continuación puedes hacer un nuevo test, ver tus informes anteriores y consultar los gráficos de tu último test y tu evolución.
+	</p>
+
+	<section class="d-flex justify-content-around">
+		<a type="button" class="btn btn-primary" href="/informe"  style="background: linear-gradient(to bottom, #4f6bf5 , #8e86f7);border-radius: 20px; width: 120px; border-style:hidden">Ver informes</a>
+		<a type="button" class="btn btn-primary" href="/testCDD" style="background: linear-gradient(to bottom, #4f6bf5 , #8e86f7); border-radius: 20px; width: 200px; border-style:hidden">Hacer un nuevo test</a>
+	</section>
+	
+</div>
+<section id="ultimoTestSection" style="display: none;">
+	<h2>Resultado de tu último test</h2>
+    <canvas id="ultimoTest"></canvas>
+</section>
+
+<section id="ultimosTestSection" style="display: none;">
+	<h2>Resultados de tus últimos test por áreas</h2>
+	<div class="form-row">
+		<div id="porAreas" class="form-group col-md-12">
+		  <label for="areaGrafico">Selecciona el área a visualizar:</label>
+		  <select id="areaGrafico" class="form-control" onchange="generaGraficoAreas()" style="border-color: #e487e4;border-radius: 5px 5px 5px 5px; border-width: 2px;">
+			<option selected value="finalMark" >Calificación global</option>
+			<option value="area_1">Información</option>
+			<option value="area_2">Comunicación</option>
+			<option value="area_3">Creación de contenidos digitales</option>
+			<option value="area_4">Seguridad</option>
+			<option value="area_5">Resolución de problemas</option>
+			<option value="area_6">Prueba</option> 
+			<!-- Aqui  nombre del area 6 -->
+		  </select>
+		</div>
+	</div>
+    <canvas id="ultimosTest"></canvas>
+</section>
+
+<script> // Aqui label de la grafica
+	const labels = ['Información', 'Comunicación', ['Creación de','contenidos digitales'], 'Seguridad', ['Resolución de','problemas'], 'Prueba', ['Calificación', 'global'] ];
+	
+	//const tests = {{tests | raw}};
+	const testRaw = `{{tests | raw}}`;
+	let tests = null; 
+	try {
+		tests = JSON.parse(testRaw);
+	} catch (error) {
+		console.error("Error al parsear el json. JSON: "+ testRaw);
+		console.error(error);
+		tests = [];
+	}
+	console.log(tests);
+	
+	
+	var marks = [];
+	tests.forEach(test => {
+		 marks.push(getMark(test));
+	});
+
+	var timeFormat = 'YYYY/MM/DD';
+
+	var timeLabels = [];
+	var areas = {};
+
+	tests.forEach(test => {
+		//console.log(new Date(test.fecha));
+		//timeLabels.push(new Date(test.fecha));
+		timeLabels.push(test.fecha);
+		for (const key in test) {
+			if (Object.hasOwnProperty.call(test, key) && ( key.includes('area') || key.toLocaleLowerCase() == 'finalmark')) {
+
+				areas[key] = areas[key] ? areas[key] : [];
+				areas[key].push(test[key]);
+			}
+		}
+	});
+
+	console.log(tests);
+	var presets = window.chartColors;
+		var utils = Samples.utils;
+		
+		if(marks.length > 0){
+			document.getElementById("ultimoTestSection").style = 'block';
+			new Chart(document.getElementById('ultimoTest').getContext('2d'), {
+				// The type of chart we want to create
+				type:'bar',
+				// The data for our dataset
+				data: {
+					labels,
+					datasets: 
+						[
+							{
+								label: 'Tu puntuación',
+								//backgroundColor: utils.transparentize(presets.purple),
+								backgroundColor: [
+									'#CBBDEE', 
+									'#CBBDEE',
+									'#CBBDEE',
+									'#CBBDEE',
+									'#CBBDEE',
+									'#CBBDEE',
+									utils.transparentize(presets.green),
+								],
+								borderColor: presets.red,
+								maxBarThickness: 6,
+								minBarLength: 0,
+								data: Object.values(marks[0]),
+							},
+						],
+				},
+				// Configuration options go here
+				options: {
+					responsive : true,
+					scales:{
+						xAxes:[{
+							ticks: {
+								fontSize: 15,
+								autoSkip: false,
+							}	
+						}],
+						yAxes:[{
+							ticks:{
+								beginAtZero:true,
+								max: 6,
+								min: 0,
+								stepSize: 1,
+								callback: function(value, index, values) {
+									return value > 0 ? parseMarkToString(value) : "";
+								},
+								fontSize: 15,
+							}}]},
+						
+					legend: {
+						display: false,
+					}
+
+				},
+			});
+
+			if(marks.length > 1){
+
+
+				//console.log(timeLabels);
+				document.getElementById("ultimosTestSection").style = 'block';
+				generaGraficoAreas();
+			}
+
+		}
+	function generaGraficoAreas() {
+		let area = document.getElementById("areaGrafico").value.toLocaleLowerCase(); 
+		console.log(timeLabels);
+		console.log(areas);
+		console.log(area);
+		new Chart(document.getElementById('ultimosTest').getContext('2d'), {
+						// The type of chart we want to create
+						type:'line',
+
+						// The data for our dataset
+						data: {
+							labels: timeLabels.reverse(),
+							datasets: 
+								[
+									{
+										label: 'Tu puntuación',
+										backgroundColor: utils.transparentize(presets.blue),
+										borderColor: presets.blue,
+										data: Object.values(areas[area].reverse()),
+										//data: Object.values(marks[0]),
+									},
+								],
+							
+						},
+
+						// Configuration options go here
+						options: {
+							scales: {
+								xAxes: [{
+									ticks: {
+										fontSize: 15,
+									},
+									//type: 'time',
+									time: {
+										
+										//parser: timeFormat,
+										// round: 'day'
+										//tooltipFormat: 'll HH:mm'
+									},
+									scaleLabel: {
+										display: true,
+										fontSize: 15,
+										labelString: 'Fecha de realización del test'
+									}
+								}],
+								yAxes: [{
+										scaleLabel: {
+											display: true,
+											labelString: 'value'
+										},
+										ticks:{
+											beginAtZero:true,
+											max: 6,
+											min: 0,
+											stepSize: 1,
+											callback: function(value, index, values) {
+												return value > 0 ? parseMarkToString(value) : "";
+											},
+											fontSize: 15,
+
+										},
+									}]
+							},
+							legend: {
+								display: false,
+							}
+
+						},
+					});
+
+	}
+</script>
+{% endblock %}

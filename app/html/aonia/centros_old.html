@@ -1,0 +1,325 @@
+{% extends "base.html" %}
+{% block main %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<!--<link href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table-filter-control.css" rel="stylesheet" >-->
+<link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/x-editable@1.5.1/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
+
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+<!--<script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>-->
+<script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/toolbar/bootstrap-table-toolbar.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/editable/bootstrap-table-editable.min.js"></script>
+
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+
+<style>
+  tr > td, tr > th {
+    vertical-align: middle;
+  }
+</style>
+  <h2>Centros</h2>
+  <section class="mb-3">
+    <button type="button" class="btn btn-primary" onclick="showModal()">Añadir nuevo centro</button>
+
+  </section>
+  <section class="datatable" data-mdb-bordered="true">
+    <table id="tabla-centro" class="table table-bordered"
+    data-pagination="true"
+    data-search="true"
+    data-advanced-search="true"
+    data-id-table="advancedTable"
+    data-filter-control="true"
+    data-click-to-select="true"
+    data-show-search-clear-button="true">
+      <thead>
+        <tr>
+          <th data-field="state" data-checkbox="true"></th>
+          <th scope="col">Id</th>
+          <th scope="col">Centro</th>
+          <th scope="col">Institución</th>
+          <th scope="col">Código</th>
+          <th scope="col">Provincia</th>
+          <th scope="col">Teléfono</th>
+          <th scope="col">Email</th>
+          <th scope="col">Link de matriculación</th>
+          <th scope="col">Informe</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Editor  -->
+  <div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="modal-edit-title" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-edit-title"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="modal-edit-body">
+          
+
+          <div class="form-group row">
+            <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="nombre" placeholder="Nombre del centro">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="codigo" class="col-sm-2 col-form-label">Institucion</label>
+            <div class="col-sm-10">
+                <select id="institucion_id" class="form-control">
+                    <option value="0">Elige Institucion</option>
+                    {% for institucion in instituciones %}
+                    <option value="{{institucion['id']}}">{{institucion['nombre']}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="codigo" class="col-sm-2 col-form-label">Código</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="codigo">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="codigo" class="col-sm-2 col-form-label">Provincia</label>
+            <div class="col-sm-10">
+              <select id="provincia" class="form-control">
+                <option value="0">Elige Provincia</option>
+                  <option value="Álava">Álava/Araba</option>
+                  <option value="Albacete">Albacete</option>
+                  <option value="Alicante">Alicante</option>
+                  <option value="Almería">Almería</option>
+                  <option value="Asturias">Asturias</option>
+                  <option value="Ávila">Ávila</option>
+                  <option value="Badajoz">Badajoz</option>
+                  <option value="Baleares">Baleares</option>
+                  <option value="Barcelona">Barcelona</option>
+                  <option value="Burgos">Burgos</option>
+                  <option value="Cáceres">Cáceres</option>
+                  <option value="Cádiz">Cádiz</option>
+                  <option value="Cantabria">Cantabria</option>
+                  <option value="Castellón">Castellón</option>
+                  <option value="Ceuta">Ceuta</option>
+                  <option value="Ciudad Real">Ciudad Real</option>
+                  <option value="Córdoba">Córdoba</option>
+                  <option value="Cuenca">Cuenca</option>
+                  <option value="Gerona">Gerona/Girona</option>
+                  <option value="Granada">Granada</option>
+                  <option value="Guadalajara">Guadalajara</option>
+                  <option value="Guipúzcoa">Guipúzcoa/Gipuzkoa</option>
+                  <option value="Huelva">Huelva</option>
+                  <option value="Huesca">Huesca</option>
+                  <option value="Jaén">Jaén</option>
+                  <option value="La Coruña">La Coruña/A Coruña</option>
+                  <option value="La Rioja">La Rioja</option>
+                  <option value="Las Palmas">Las Palmas</option>
+                  <option value="León">León</option>
+                  <option value="Lérida">Lérida/Lleida</option>
+                  <option value="Lugo">Lugo</option>
+                  <option value="Madrid">Madrid</option>
+                  <option value="Málaga">Málaga</option>
+                  <option value="Melilla">Melilla</option>
+                  <option value="Murcia">Murcia</option>
+                  <option value="Navarra">Navarra</option>
+                  <option value="Orense">Orense/Ourense</option>
+                  <option value="Palencia">Palencia</option>
+                  <option value="Pontevedra">Pontevedra</option>
+                  <option value="Salamanca">Salamanca</option>
+                  <option value="Segovia">Segovia</option>
+                  <option value="Sevilla">Sevilla</option>
+                  <option value="Soria">Soria</option>
+                  <option value="Tarragona">Tarragona</option>
+                  <option value="Tenerife">Tenerife</option>
+                  <option value="Teruel">Teruel</option>
+                  <option value="Toledo">Toledo</option>
+                  <option value="Valencia">Valencia</option>
+                  <option value="Valladolid">Valladolid</option>
+                  <option value="Vizcaya">Vizcaya/Bizkaia</option>
+                  <option value="Zamora">Zamora</option>
+                  <option value="Zaragoza">Zaragoza</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="telefono" class="col-sm-2 col-form-label">Teléfono</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="telefono">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="email" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="email">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="link" class="col-sm-2 col-form-label">Link</label>
+            <div class="col-sm-10">
+              <input type="url" class="form-control" id="link" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id='modal-save-button' >Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    $(function() {
+        $('#tabla-centro').bootstrapTable()
+    });
+    getData();
+    var data = '';
+    function getData(id) {
+      send(id ? {id} : {}, 'getData', result => {
+        //var data = JSON.parse(`{{centros | raw }}`);
+        console.log(result);
+        if(result.ok){
+            data = result.data;
+            generateTable(result.data);
+        }
+      });
+    }
+    function generateTable(data) {
+        let html = '';
+        if(data){
+            data.forEach( (centro, index) => {html += addRow(centro, index);});
+            document.querySelector('#tabla-centro > tbody').innerHTML = html;
+        }else{
+            html = `<div class="alert alert-warning" role="alert">No se ha encontrado ningún centro.</div>`
+            document.querySelector('#tabla-centro > tbody').innerHTML = html;
+        }
+        
+    }
+
+    function addRow(centro, index) {
+      console.log(index);
+      let registroUrl = `${window.location.protocol}//${window.location.hostname}/registro/${centro.link}`;
+        return `
+      <tr>
+          <th data-field="state" data-checkbox="true"></th>
+          <th scope="row" >${centro.id}</th>
+          <td><a href="/docentes/centro/${centro.id}" title="${centro.nombre}">${centro.nombre}</a></td>
+          <td><span title="${centro.institucion ? centro.institucion : ''}">${centro.institucion ? centro.institucion : ''}</span></td>
+          <td><span title="${centro.codigo}">${centro.codigo}</span></td>
+          <td><span title="${centro.provincia}">${centro.provincia}</span></td>
+          <td><span title="${centro.telefono}">${centro.telefono}</span></td>
+          <td><span title="${centro.email}">${centro.email}</span></td>
+          <td ><span class="btn btn-secondary" onclick="copy('${registroUrl}')" title="${registroUrl}">Copiar</span> <!-- <a href="${registroUrl}" target="_blank" title="${registroUrl}">${registroUrl}</a> --> </td>
+          <td>
+            <button type="button" class="btn btn-warning" onclick="generarInforme(${centro.id}, '${centro.nombre}')">Generar informe</button>
+          </td>
+          <td>
+            <section style ="display: flex; justify-content: space-around;"">
+              <button type="button" class="btn btn-success" onclick="showModal(${index})">Editar</button>
+              <button type="button" class="ml-3 btn btn-danger" onclick="remove(${centro.id})">Eliminar</button>
+            </section>  
+          </td>
+      </tr>
+      `;
+    }
+
+    function generarInforme(centro_id, nombre) {
+        let data = {};
+        data.action = 'generarInforme'; 
+        data.centro_id = centro_id; 
+        //console.log(data);
+          fetch(window.location.href , {
+              method: 'POST', // or 'PUT'
+              body: JSON.stringify(data) , // data can be `string` or {object}!
+              headers:{
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => {
+              if(res.ok){
+                //res.text().then(blob => {
+                res.blob().then(blob => {
+                    console.log(blob);
+                    //blob = new Blob([blob], {type: 'application/msword'});
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = `Informe del centro: ${nombre}.docx`;
+                    link.click();
+                    showNotification('Informe del centro con id '+id+' generado correctamente', 'Informe creado', 'Success')
+
+                  } )
+                }
+              
+            }).catch(error => {
+                console.log("Error",error);
+                showNotification('Error al generar el informe del centro con id ' + id, 'Error al crear el informe', 'error')
+
+                //document.getElementById("posts").insertAdjacentHTML("afterbegin", `<p>Hubo algún problema con la búsqueda. Inténtalo de nuevo</p>`);
+                //addNotification("Error", "Error enviando los datos al servidor", "error");
+            });
+      /*send({data:centro_id}, 'generarInforme', result => {
+        if(result && result.ok){
+            getData();            
+            $('#modal-edit').modal('hide');
+        }
+      });*/
+    }
+
+    function showModal(arrayIndex) {
+      
+        document.getElementById("modal-edit-title").innerHTML = arrayIndex == undefined ?  "Añadir centro" : "Editar centro";
+        document.getElementById("modal-save-button").setAttribute('onclick', arrayIndex == undefined ?  "save()" : `save('${data[arrayIndex].id}')`);
+        let elements = document.querySelectorAll('#modal-edit-body input, #modal-edit-body select');
+        elements.forEach(element => {
+            element.value = arrayIndex != undefined && data[arrayIndex].hasOwnProperty(element.id) ?  data[arrayIndex][element.id] : '';
+            
+        });
+        $('#modal-edit').modal({show:true});
+
+    }
+
+    function save(id) {
+      let dataToSend = {};
+      let elements = document.querySelectorAll('#modal-edit-body input, #modal-edit-body select');
+        elements.forEach(element => {
+            dataToSend[element.id] = element.value;
+        });
+
+      if(id){
+        dataToSend.id = id;
+      }
+      console.log(dataToSend);
+      send({data:dataToSend}, 'save', result => {
+        if(result && result.ok){
+            getData();            
+            $('#modal-edit').modal('hide');
+            showNotification('Centro con id '+id+' modificado correctamente', '', 'Success')
+        }
+      }, () => showNotification('Error al modificar el centro con id '+id, '', 'error'));
+    }
+
+    function remove(id) {
+        send({id}, 'remove', result => {
+        if(result && result.ok){
+            getData();            
+            showNotification('Centro eliminado correctamente', '', 'Success')
+            $('#modal-edit').modal('hide');
+        }else{
+          showNotification(result.error, 'Error al eliminar el centro', 'Error')
+        }
+      }, () => showNotification('Error al eliminar el centro', '', 'Error'));
+    }
+    {% include "tools/send.js" %}
+    {% include "tools/tools.js" %}
+
+
+  </script>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block main %}
+<main class="container" >
+    <div id=contenedor_registro style="border-radius: 25px; 
+                                background-image: url('public/img/Imagen-bienvenida-con-texto-Login-hd.png'); 
+                                padding: 20px;
+                                margin-left: 10%;
+                                margin-top: 5%;
+                                padding-top: 5%;
+                                padding-bottom: 5%;
+                                width: 80%;
+                                align-items: center;
+                                align-content: center">
+    <h5>Recuperar contraseña olvidada</h5>
+        {% if estado == 0 %}
+        <form method="POST">
+            <div class="form-group" style="width: 50%; min-width:200px">
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Introduce tu correo">
+                <small id="emailHelp" class="form-text text-muted">Introduce el correo electrónico con el que te registraste</small>
+            </div>
+            
+                <div>
+                    <button type="submit" class="btn btn-success" name="action" value="resetPassRequest" style="margin-top: 2%; margin-bottom: 2%; background: linear-gradient(to bottom, #4f6bf5 , #8e86f7); border-radius: 20px; width: 120px; border-style:hidden">Recuperar</button>
+                    <p> Vuelve a la página anterior para <a href="/"> <b>iniciar sesión</b></a></p>
+                </div>
+            
+        </form>
+        {% elseif estado == 1 %}
+        <div class="alert alert-success" role="alert">Si el correo es válido, te llegará un correo con un enlace para cambiar la contraseña. <b>El enlace es válido durante 24h</b></div>
+        
+            <div>
+                <a class="btn btn-success" name="action" style="background: linear-gradient(to bottom, #4f6bf5 , #8e86f7); border-radius: 20px; width: 120px; border-style:hidden" href="/">Volver</a>
+                 
+                    
+            </div>
+        
+        
+        {% elseif estado == 2 %}
+        <form method="POST"  id='form'>
+            <div class="form-group">
+                <input type="password" class="form-control" id="pass1" name="pass" placeholder="Introduce tu nueva contraseña">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="pass2" name="pass" placeholder="Repite la contraseña contraseña">
+            </div>
+            <div class="alert alert-danger mt-3" role="alert" id="alert" style="display:none">Las contraseñas no coinciden.</div>
+                <div>
+                    
+                    <button type="submit" class="btn btn-success" name="action" value="updatePass" style="background-color: #1F2ECD; border-radius: 20px; width: 120px">Cambiar contraseña</button>
+                        
+                </div>
+        
+        </form>
+    </div>
+    <script>
+
+        document.getElementById("form").addEventListener("submit", function(e) {
+            let pass1 = document.getElementById('pass1').value;
+            let pass2 = document.getElementById('pass2').value;
+
+            if(pass1 != pass2){
+                e.preventDefault();
+                document.getElementById('pass1').focus();
+                document.getElementById('alert').style.display = 'block';
+                return false; 
+            }
+            return true;
+        });
+        function validatePass(e) {
+            let pass1 = document.getElementById('pass1').value;
+            let pass2 = document.getElementById('pass2').value;
+
+            if(pass1 != pass2){
+                e.preventDefault();
+                document.getElementById('alert').style.display = 'block';
+                return false; 
+            }
+            return true;
+
+        }
+    </script>
+    {% elseif estado == 3 %}
+    <div class="alert alert-danger" role="alert">Vaya, el enlace que has solicitado o no es válido o ha expirado.</div>
+    {% endif %}
+</main>
+{% endblock %}

@@ -1,0 +1,103 @@
+/*
+
+CREATE DATABASE testCdd;
+
+CREATE USER 'testCdd'@'localhost' IDENTIFIED BY 'eUcd3UsmVIanAyn9';
+GRANT SELECT, INSERT, UPDATE, DELETE ON testCdd.* TO 'testCdd'@'localhost';
+
+INSERT INTO `user`(cedula) VALUES ('1');
+
+*/
+
+CREATE TABLE `user` (
+  `id` MEDIUMINT NOT NULL AUTO_INCREMENT,
+  `cedula` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `uq_cedula` (`cedula` ASC)
+  );
+
+ALTER TABLE user ADD area_1 SMALLINT NOT NULL DEFAULT -1;
+ALTER TABLE user ADD area_2 SMALLINT NOT NULL DEFAULT -1;
+ALTER TABLE user ADD area_3 SMALLINT NOT NULL DEFAULT -1;
+ALTER TABLE user ADD area_4 SMALLINT NOT NULL DEFAULT -1;
+ALTER TABLE user ADD area_5 SMALLINT NOT NULL DEFAULT -1;
+ALTER TABLE user ADD finalMark DECIMAL(3,2) NOT NULL DEFAULT -1;
+
+
+CREATE TABLE `adminUsers` (
+  `user` VARCHAR(50) NULL DEFAULT NULL,
+  `pass` VARCHAR(260) NULL DEFAULT NULL,
+  PRIMARY KEY (`user`)
+  );
+
+CREATE TABLE `testCDD_responses` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `user_id` MEDIUMINT NOT NULL,
+  `fecha` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  INDEX `idx_user_id` (`user_id` ASC)
+);
+
+ALTER TABLE testCDD_responses ADD respuesta_1_1 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_1_2 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_1_3 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_2_1 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_2_2 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_2_3 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_2_4 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_2_5 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_2_6 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_3_1 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_3_2 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_3_3 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_3_4 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_4_1 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_4_2 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_4_3 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_4_4 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_5_1 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_5_2 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_5_3 CHAR(1) NOT NULL DEFAULT '';
+ALTER TABLE testCDD_responses ADD respuesta_5_4 CHAR(1) NOT NULL DEFAULT '';
+
+
+CREATE TABLE `testCDD_marks` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `user_id` MEDIUMINT NOT NULL,
+  `fecha` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_user_id_marks` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  INDEX `idx_user_id_marks` (`user_id` ASC)
+);
+
+ALTER TABLE testCDD_marks ADD area_1 SMALLINT NOT NULL DEFAULT 0;
+ALTER TABLE testCDD_marks ADD area_2 SMALLINT NOT NULL DEFAULT 0;
+ALTER TABLE testCDD_marks ADD area_3 SMALLINT NOT NULL DEFAULT 0;
+ALTER TABLE testCDD_marks ADD area_4 SMALLINT NOT NULL DEFAULT 0;
+ALTER TABLE testCDD_marks ADD area_5 SMALLINT NOT NULL DEFAULT 0;
+ALTER TABLE testCDD_marks ADD finalMark DECIMAL(3,2) NOT NULL DEFAULT 0;
+
+
+CREATE TABLE `testCDD_media` (
+  `id` SMALLINT NOT NULL AUTO_INCREMENT,
+  `count` INT NOT NULL,
+
+  PRIMARY KEY (`id`)
+);
+
+ALTER TABLE testCDD_media ADD area_1 DECIMAL(3,2) NOT NULL;
+ALTER TABLE testCDD_media ADD area_2 DECIMAL(3,2) NOT NULL;
+ALTER TABLE testCDD_media ADD area_3 DECIMAL(3,2) NOT NULL;
+ALTER TABLE testCDD_media ADD area_4 DECIMAL(3,2) NOT NULL;
+ALTER TABLE testCDD_media ADD area_5 DECIMAL(3,2) NOT NULL;
+ALTER TABLE testCDD_media ADD finalMark DECIMAL(3,2) NOT NULL;
+INSERT INTO testCDD_media(count, area_1, area_2, area_3, area_4, area_5, finalMark) VALUES (0, 0, 0, 0, 0, 0, 0);
+
+
+
+CREATE TABLE `uncompleted_test` (
+  `user_id` INT NOT NULL,
+  `data` TEXT NOT NULL,
+  PRIMARY KEY (`user_id`)
+);

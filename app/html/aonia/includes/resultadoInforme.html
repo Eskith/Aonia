@@ -1,0 +1,859 @@
+<style>
+    #explicacionAreas span,
+    #consejos span {
+        font-weight: bolder;
+    }
+
+    #tablaNiveles>table {
+        width: auto;
+    }
+
+    #tablaNiveles table {
+        border: 1px solid #ddd;
+        border-collapse: separate;
+        border-left: 0;
+        border-radius: 4px;
+        border-spacing: 0px;
+    }
+
+    #tablaNiveles thead {
+        display: table-header-group;
+        vertical-align: middle;
+        border-color: inherit;
+        border-collapse: separate;
+    }
+
+    #tablaNiveles tr {
+        display: table-row;
+        vertical-align: inherit;
+        border-color: inherit;
+    }
+
+    #tablaNiveles th,
+    #tablaNiveles td {
+        padding: 5px 4px 6px 4px;
+        text-align: center;
+        vertical-align: top;
+        border-left: 1px solid #ddd;
+    }
+
+    #tablaNiveles tr>td:first-child {
+        padding: 5px 1rem 6px 1rem;
+    }
+
+    #tablaNiveles tr>td:last-child {
+        padding: 5px 3rem 6px 3rem;
+    }
+
+    #tablaNiveles td {
+        border-top: 1px solid #ddd;
+        font-weight: bold;
+        width: 50%;
+    }
+
+    #tablaNiveles thead:first-child tr:first-child th:first-child,
+    #tablaNiveles tbody:first-child tr:first-child td:first-child {
+        border-radius: 4px 0 0 0;
+    }
+
+    #tablaNiveles thead:last-child tr:last-child th:first-child,
+    #tablaNiveles tbody:last-child tr:last-child td:first-child {
+        border-radius: 0 0 0 4px;
+    }
+
+    .center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #informacionResultados .title {
+        font-size: larger;
+        font-weight: bold;
+    }
+</style>
+<!-- he quitado {{nombre}} {{apellidos}} por que no tiene funcionalidad-->
+<div id="page1">
+    <p><br><br>Estimado usuario,</p>
+    <p>
+        Gracias por haber realizado el <b>Test de Autoevaluación de la Competencia Digital Docente</b> de <b>Aonia</b>.
+        <br><br>
+        Esperamos haberte ayudado a reflexionar acerca de tus prácticas relacionadas con la competencia digital, y que
+        este
+        sea el punto de partida para que sigas desarrollando tu formación en el futuro.
+        <br><br>
+        Te recordamos cuáles son estas cinco áreas:
+        <br><br>
+    </p>
+
+
+    <section id="explicacionAreas">
+        <ol>
+            <li>
+                <span style="background-color:#deebef">Información y alfabetización informacional:</span> identificar,
+                localizar, recuperar, almacenar, organizar y analizar la información digital, evaluando su finalidad y
+                relevancia.
+            </li>
+            <li>
+                <span style="background-color:#deebef">Comunicación y colaboración:</span> comunicar en entornos
+                digitales,
+                compartir recursos a través de herramientas en línea, conectar y colaborar con otros a través de
+                herramientas digitales, interactuar y participar en comunidades y redes; conciencia intercultural.
+            </li>
+            <li>
+                <span style="background-color:#deebef">Creación de contenidos digitales:</span> crear y editar
+                contenidos
+                nuevos (textos, imágenes, videos…), integrar y reelaborar conocimientos y contenidos previos, realizar
+                producciones artísticas, contenidos multimedia y programación informática, saber aplicar los derechos de
+                propiedad intelectual y las licencias de uso.
+            </li>
+            <li>
+                <span style="background-color:#deebef">Seguridad:</span> protección personal, protección de datos,
+                protección de la identidad digital, uso seguro y sostenible.
+            </li>
+            <li>
+                <span style="background-color:#deebef">Resolución de problemas:</span> identificar necesidades y
+                recursos
+                digitales, tomar decisiones a la hora de elegir la herramienta digital apropiada, acorde a la finalidad
+                o
+                necesidad, resolver problemas conceptuales a través de medios digitales, resolver problemas técnicos,
+                uso
+                creativo de la tecnología, actualizar la competencia propia y la de otros.
+            </li>
+            <li>
+                <span style="background-color:#deebef">Prueba:</span> Lorem ipsum dolor sit amet, consectetur adipiscing
+                elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit amet interdum.
+                Mauris
+                quis ipsum interdum, consequat sapien et, finibus odio. Vestibulum in orci in lacus commodo viverra.
+                Proin
+            </li>
+        </ol>
+    </section>
+    <p>El Marco Común Europeo de Competencia Digital Docente establece 3 niveles de Competencia para cada una de estas
+        áreas. Dentro de cada nivel, además, encontrarás dos divisiones:</p>
+    <div id="tablaNiveles" class="table-responsive">
+        <style>
+            #tablaNiveles tr>td:last-child {
+                padding: 20px 65px;
+            }
+
+            #tablaNiveles tr>td:first-child {
+                padding: 20px 65px;
+            }
+        </style>
+
+        <table class="center table table-bordered" style="color:#ffffff">
+
+            <tr style="background-color: #e5b8ff;">
+                <td>Nivel A1</td>
+                <td>Acceso</td>
+            </tr>
+            <tr style="background-color: #db9bfe;">
+                <td>Nivel A2</td>
+                <td>Plataforma</td>
+            </tr>
+            <tr style="background-color: #94e6fe;">
+                <td>Nivel B1</td>
+                <td>Intermedio</td>
+            </tr>
+            <tr style="background-color: #69befe;">
+                <td>Nivel B2</td>
+                <td>Intermedio alto</td>
+            </tr>
+            <tr style="background-color: #7171f4;">
+                <td>Nivel C1</td>
+                <td>Dominio operativo eficaz</td>
+            </tr>
+            <tr style="background-color: #5133cc;">
+                <td>Nivel C2</td>
+                <td>Maestría</td>
+            </tr>
+        </table>
+    </div>
+
+    <p>Para ayudarte a definir tu itinerario de formación, a continuación encontrarás un resumen los resultados que has
+        obtenido en la evaluación.</p>
+    <h4>Resumen de resultados de tu evaluación:</h4>
+    <div class="table-responsive prueba">
+        <table class="center table table-bordered ">
+            <thead>
+                <tr style="background-color: #8e86f7; color: #ffffff;">
+                    <th>Área de la Competencia Digital Docente</th>
+                    <th>Global</th>
+                    <th>Información</th>
+                    <th>Comunicación</th>
+                    <th>Creación de contenidos digitales</th>
+                    <th>Seguridad</th>
+                    <th>Resolución de problemas</th>
+                    <th>Prueba</th>
+                    <!-- Aqui nombre del Area 6 -->
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Nivel</td>
+                    <td>{{finalMark}}</td>
+                    {% for mark in letterMark %}
+                    <td>{{mark}}</td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+            <caption class="text-center">Tabla resumen de los resultados por área</caption>
+        </table>
+    </div>
+</div>
+<div id="page2">
+    <section class="mt-3" id="informacionResultados">
+        <span style="background-color:#deebef"><b>Información</b></span>
+        <p class="">{{descriptores['area_1']}}<br></p>
+        <span style="background-color:#deebef"><b>Comunicación</b></span>
+        <p class="">{{descriptores['area_2']}}<br></p>
+        <span style="background-color:#deebef"><b>Creación de contenidos digitales</b></span>
+        <p class="">{{descriptores['area_3']}}<br></p>
+        <span style="background-color:#deebef"><b>Seguridad</b></span>
+        <p class="">{{descriptores['area_4']}}<br></p>
+        <span style="background-color:#deebef"><b>Resolución de problemas</b></span>
+        <p class="">{{descriptores['area_5']}}<br><br></p>
+        <span style="background-color:#deebef"><b>Prueba</b></span>
+        <!-- Aqui nombre del Aera 6 -->
+        <p class="">{{descriptores['area_6']}}<br><br></p>
+    </section>
+    <section>
+        <canvas id="myChart" style="background-color: #f5e171;"></canvas>
+    </section>
+    <section id="consejos">
+        <h4>Consejos para el desarrollo de tu itinerario de formación</h4>
+        <p>Las páginas anteriores te ayudarán a desarrollar tu <span>Competencia Digital</span> articulando distintos
+            aspectos de la misma. Además, te recomendamos seguir las siguientes directrices:</p>
+        <section class="mt-3 ml-5 mb-3" id="informacionRecomendaciones">
+            <ul class="list-group">
+                <li class="">Consulta los descriptores de referencia para la Competencia Digital. Te ayudarán a conocer
+                    qué
+                    necesitas mejorar. Los encontrarás en la página del DigCom.</li>
+                <br>
+                <li class="">Diseña un itinerario <b>homogéneo</b>, en el que no destaquen unas áreas competenciales
+                    sobre
+                    otras. Consulta con tus compañeros y compañeras qué formaciones les han funcionado, así como la
+                    oferta
+                    formativa que te ofrece tu centro de trabajo.</li>
+                <br>
+                <li class="">Procura que sea también <b>posibilitador</b>, esto es, que <b>no esté orientado
+                        exclusivamente
+                        a aprender a manejar herramientas concretas</b>, sino a saber lo que puedes lograr con
+                    tecnología en
+                    relación con los objetivos que quieres alcanzar</li>
+                <br>
+                <li class="">Intenta que tu ruta sea <b>coherente con metodologías innovadoras</b>, que no repliquen
+                    prácticas que no favorecen el aprendizaje.</li>
+                <br>
+                <li class="">Para terminar, sé <b>coherente con el nuevo rol de docente</b>, como posibilitador del
+                    aprendizaje, y no como mero transmisor del conocimiento.</li>
+            </ul>
+        </section>
+    </section>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+<script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.1/dist/html2canvas.min.js"></script>
+<button type="button" class="btn btn-warning" onclick="imprimirInforme()"
+    style="background: linear-gradient(to bottom, #4f6bf5 , #8e86f7); color:#ffffff; border-radius: 20px; width: 150px; border-style:hidden">Descargar</button>
+<!-- <button type="button" class="btn btn-warning" onclick="imprimirInformeIndividual()" style="background: linear-gradient(to bottom, #4f6bf5 , #8e86f7); color:#ffffff; border-radius: 20px; width: 150px; border-style:hidden">Descargar PDF</button> -->
+
+<script>
+    //Chart grafica
+    var presets = window.chartColors;
+    var utils = Samples.utils;
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    var backgroundColor = 'white';
+    Chart.plugins.register({
+        beforeDraw: function (c) {
+            var ctx = c.chart.ctx;
+            ctx.fillStyle = backgroundColor;
+            ctx.fillRect(0, 0, c.chart.width, c.chart.height);
+        }
+    });
+
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'radar',
+
+        // Aqui nombre del label
+        data: {
+            labels: ['Información', 'Comunicación', 'Creación de contenidos digitales', 'Seguridad', 'Resolución de problemas', "Prueba"],
+            datasets:
+                [
+                    {
+                        label: 'Tu puntuación',
+                        backgroundColor: utils.transparentize(presets.red),
+                        borderColor: presets.red,
+                        data: [{{ mark| join(', ') }} ],
+        //pointBorderColor: "#fff",
+        //pointHoverBackgroundColor: "#fff",
+        //pointHoverBorderColor: "rgba(179,181,198,1)",
+        //data: [ 1, 1, 2, 4, 3 ], 
+    },
+        {% if globalMark %}
+    {
+        label: 'Puntuación Media ({{count}} resultados)',
+            backgroundColor: utils.transparentize(presets.yellow),
+                borderColor: presets.yellow,
+                    data: [{{ globalMark| join(', ') }} ]
+                        },
+    {% endif %}
+                    ],
+                
+            },
+
+    // Configuration options go here
+    options: {
+        responsive: true,
+            maintainAspectRatio: true,
+                spanGaps: false,
+                    elements: {
+            line: {
+                tension: 0.000001
+            }
+        },
+        title: {
+            display: true,
+                    /*text: 'Grafico comparativo'*/
+                },
+        /*legend: {
+            display: true,
+            labels: {
+                fontColor: 'rgb(255, 99, 132)'
+            }
+        }, */
+        plugins: {
+            filler: {
+                propagate: false
+            },
+            'samples-filler-analyser': {
+                target: 'chart-analyser'
+            }
+        },
+        scale: {
+            angleLines: {
+                display: false
+            },
+            ticks: {
+                beginAtZero: true,
+                    suggestedMin: 0,
+                        suggestedMax: 1,
+                            min: 0,
+                                max: 6,
+                                    stepSize: 1,
+                                        callback: function(value, index, values) {
+                                            return value > 0 ? parseMarkToString(value) : "";
+                                        },
+                fontSize: 15,
+                    },
+        },
+        legend: {
+            display: true,
+                labels: {
+                fontColor: 'black',
+                    fontSize: 18,
+                        
+                    },
+        },
+    },
+        });
+
+    var modulo = chart["data"]["datasets"][0]["data"];
+    console.log(modulo);
+
+
+    function imprimirInformeIndividual() {
+        let data = {};
+        data.action = 'generarInformeIndividual';
+        fetch(window.location.href, {
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(data), // data can be `string` or {object}!
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => {
+            console.log(res.headers.get("content-type"));
+            if (res.ok) {
+                res.text().then(blob => {
+                    //res.blob().then(blob => {
+                    console.log(blob);
+                    //crea el documento y al descargarlo le pone el nombre del centro del parámetro recibido
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    let extension = '';
+                    if (res.headers.get("content-type") == 'application/msword') {
+                        extension = 'docx';
+                    } else {
+                        extension = 'pdf';
+                    }
+
+
+                    link.download = `Informe Individual.${extension}`;
+                    link.click();
+                    //notificación de acción ok
+                    showNotification('Informe individual  generado correctamente', 'Informe creado', 'Success')
+
+                })
+            }
+        }).catch(error => {
+            console.log("Error", error);
+            showNotification('Error al generar el informe individual , Error al crear el informe', 'error')
+        });
+    }
+
+
+    //opcion actual
+    function imprimirInforme() {
+        // // //import { jsPDF } from "jspdf";
+        var jsPDF = window.jspdf.jsPDF;
+        var doc = new jsPDF('p', 'mm', [297, 210]);;
+
+
+
+        var elementHandler = {
+            '#ignorePDF': function (element, renderer) {
+                return true;
+            }
+        };
+        //var source = doc.splitTextToSize(window.document.getElementsByTagName("main")[0], 850);;
+        window.html2canvas = html2canvas;
+        doc.setFontSize(4);
+
+        var img = new Image()
+        img.src = "/public/img/Logo-Aonia-Educacion-Login-hd.png"
+        doc.addImage(img, 'png', 5, 5, 150, 30);
+        doc.html(
+
+            document.getElementById("page1"),
+            { // Primera parte del documento
+                margin: [40, 60, 40, 60],
+                callback: function (doc) {
+                    doc.save("Informe");
+                },
+                x: 15,
+                y: 40,
+                width: 10,
+                filename: "Informe",
+                margin: [20, 20, 20, 20],
+                html2canvas: {
+                    width: 10,
+                    scale: window.devicePixelRatio / 7.5,
+                    //margin: {top}
+                }
+
+            });
+
+        // segunda pag del pdf (la libreria imprime la pantalla como una imagen y se corta por esohay que dividirla en dos
+        // y la libreria actual solo permite un fragmento de html no dos por como esta diseñada la pag y otras librerias
+        // no son compatibles por el diseño de la pag ) 
+        doc.addPage();
+
+        doc.addImage(img, 'png', 5, 5, 150, 30);
+
+        // dependiendo del nivel de descriptores mostraremos uno u otro la array de modulo tiene los niveles por seccion en este caso
+        // modulo[0] se la puntuacion de  informacion
+        // Informacion
+        switch (modulo[0]) {
+            case 1:
+                doc.setFontSize(8);
+                doc.setFont(undefined, 'bold');
+                doc.setTextColor(82, 99, 204);
+                doc.text("Información", 15, 50);
+                doc.setFont(undefined, 'normal');
+                doc.text("Eres capaz de usar de forma elemental un buscador web. Trasladas tus hábitos de búsqueda de la vida real a la red, y eso hace que no siempre ", 15, 54);
+                doc.text("encuentres lo que necesitas de forma rápida. Te recomendamos desarrollar estrategias de búsqueda más elaboradas empleando algunos de los ", 15, 57);
+                doc.text("trucos de búsqueda más populares.", 15, 60);
+                break;
+
+            case 2:
+                doc.setFontSize(8);
+                doc.setFont(undefined, 'bold');
+                doc.setTextColor(82, 99, 204);
+                doc.text("Información", 15, 50);
+                doc.setFont(undefined, 'normal');
+                doc.text("Ya tienes algo de experiencia buscando contenido en la red, pero sabes que puedes mejorar. Además, te gustaría poder almacenar de forma", 15, 54);
+                doc.text("ordenada tus búsquedas y poder compartirlas de forma sencilla con otros docentes y con tu alumnado..", 15, 57);
+                break;
+            case 3:
+                doc.setFontSize(8);
+                doc.setFont(undefined, 'bold');
+                doc.setTextColor(82, 99, 204);
+                doc.text("Información", 15, 50);
+                doc.setFont(undefined, 'normal');
+                doc.text("Tienes una sólida estrategia de búsqueda. Discriminas cuáles son las fuentes fiables y las que no, y utilizas herramientas de suscripción ", 15, 54);
+                doc.text("para acceder a las mismas. Quieres mejorar tus habilidades de búsqueda y filtrado también en redes sociales y otros medios online.", 15, 57);
+                break;
+            case 4:
+                doc.setFontSize(8);
+                doc.setFont(undefined, 'bold');
+                doc.setTextColor(82, 99, 204);
+                doc.text("Información", 15, 50);
+                doc.setFont(undefined, 'normal');
+                doc.text("A la hora de comunicarte, utilizas una amplia variedad de herramientas, y manejas muchas de sus funcionalidades, no solo las básicas. Eres ", 15, 54);
+                doc.text("consciente de la necesidad que tienen otras personas de manejar adecuadamente las herramientas de comunicación para su desarrollo ", 15, 57);
+                doc.text("profesional y personal, pero no has desarrollado habilidades para trabajar este aspecto.", 15, 60);
+                break;
+            case 5:
+                doc.setFontSize(8);
+                doc.setFont(undefined, 'bold');
+                doc.setTextColor(82, 99, 204);
+                doc.text("Información", 15, 50);
+                doc.setFont(undefined, 'normal');
+                doc.text("Tienes establecidas tus estrategias de búsqueda en función de la información que deseas obtener. Tienes un criterio para discriminar ", 15, 54);
+                doc.text("información y organizarla en función de qué uso vas a darle. Empleas fuentes dinámicas y estrategias de etiquetado que te permiten ", 15, 57);
+                doc.text("acceder al contenido de forma eficaz.", 15, 60);
+                break;
+            case 6:
+                doc.setFontSize(8);
+                doc.setFont(undefined, 'bold');
+                doc.setTextColor(82, 99, 204);
+                doc.text("Información", 15, 50);
+                doc.setFont(undefined, 'normal');
+                doc.text("Tienes una estrategia compleja y bien definida para la búsqueda de información, que incluye criterios de discriminación de fuentes ", 15, 54);
+                doc.text("(también especializadas) claros. Participas y compartes información online con otros docentes en comunidades educativas.", 15, 57);
+                break;
+        }
+
+        // Comunicacion
+
+        switch (modulo[1]) {
+            case 1:
+                doc.setFont(undefined, 'bold');
+                doc.text("Comunicación", 15, 65);
+                doc.setFont(undefined, 'normal');
+                doc.text("Utilizas las funcionalidades básicas de las herramientas de comunicación digital más habituales (correo electrónico, mensajería). ", 15, 68);
+                doc.text("En ocasiones encuentras que no has adjuntado bien un archivo, o que algo de información se 'pierde' por el camino. Te proponemos ", 15, 71);
+                doc.text("trabajar para explorar cuál es el mejor medio para comunicarte en cada caso desarrollando tus habilidades.", 15, 74);
+                break;
+
+            case 2:
+                doc.setFont(undefined, 'bold');
+                doc.text("Comunicación", 15, 65);
+                doc.setFont(undefined, 'normal');
+                doc.text("Empleas las herramientas más habituales para comunicarte: chateas, haces videoconferencias con distintas herramientas, pero notas que te ", 15, 68);
+                doc.text("falta soltura. Sabes compartir documentos y archivos a través de medios sencillos (el correo electrónico o mensajería), pero te gustaría ", 15, 71);
+                doc.text("conocer algún truco extra para hacerlo de forma más eficaz", 15, 74);
+                break;
+            case 3:
+                doc.setFont(undefined, 'bold');
+                doc.text("Comunicación", 15, 65);
+                doc.setFont(undefined, 'normal');
+                doc.text("Tomas decisiones informadas a la hora de enfrentarte a la resolución de un problema empleando medios tecnológicos. Eres capaz de resolver", 15, 68);
+                doc.text(" una amplia variedad de problemas, siempre que no supongan manejar código, solo de forma anecdótica.", 15, 71);
+                break;
+            case 4:
+                doc.setFont(undefined, 'bold');
+                doc.text("Comunicación", 15, 65);
+                doc.setFont(undefined, 'normal');
+                doc.text("Utilizas una amplia gama de herramientas, en función de tus necesidades y las de tu alumnado, que te permiten colaborar en línea, debatir", 15, 68);
+                doc.text("contenidos, etc., siempre siguiendo el hilo del proceso. Conoces el concepto de identidad digital y tienes una estrategia básica para su ", 15, 71);
+                doc.text("gestión, que te gustaría trabajar también con tu alumnado.", 15, 74);
+                break;
+            case 5:
+                doc.setFont(undefined, 'bold');
+                doc.text("Comunicación", 15, 65);
+                doc.setFont(undefined, 'normal');
+                doc.text("Utilizas una amplia gama de medios y herramientas en función de tus necesidades y las de tu alumnado, incluyendo herramientas de gestión,", 15, 68);
+                doc.text("como aulas virtuales, etc., con las que tienes mucha seguridad. Utilizas herramientas con el fin de colaborar con otras personas en la ", 15, 71);
+                doc.text("producción, discusión y puesta a disposición de contenidos. Te gustaría explorar otras opciones más complejas, como las referidas al ", 15, 74);
+                doc.text("trabajo con código abierto.", 15, 77);
+                break;
+            case 6:
+                doc.setFont(undefined, 'bold');
+                doc.text("Comunicación", 15, 65);
+                doc.setFont(undefined, 'normal');
+                doc.text("Fomentas el uso de herramientas de comunicación digitales, por la importancia que cobran para el futuro personal y profesional de tu ", 15, 68);
+                doc.text("alumnado. Eres consciente de la importancia de la identidad digital y tienes estrategias para su gestión que transmites.", 15, 71);
+                break;
+        }
+
+        // Creacion de contenido 
+
+        switch (modulo[2]) {
+            case 1:
+                doc.setFont(undefined, 'bold');
+                doc.text("Creación de contenidos digitales", 15, 79);
+                doc.setFont(undefined, 'normal');
+                doc.text("Tienes a tu alcance una gran diversidad de herramientas que te permiten crear mucho contenido, pero te limitas a utilizar los más ", 15, 82);
+                doc.text("sencillos y te gustaría mejorar: crear presentaciones interactivas, vídeos más atractivos, etc. Además, quieres conocer cómo reciclar ", 15, 85);
+                doc.text("contenidos antiguos o cedidos por otros docentes.", 15, 88);
+                break;
+
+            case 2:
+                doc.setFont(undefined, 'bold');
+                doc.text("Creación de contenidos digitales", 15, 79);
+                doc.setFont(undefined, 'normal');
+                doc.text("Eres capaz de realizar cambios sencillos en contenidos digitales creados por otros docentes en herramientas sencillas, como presentaciones ", 15, 82);
+                doc.text("o documentos de texto. Te gustaría poder trabajar de forma colaborativa en esos contextos y emplear herramientas un poco más elaboradas, ", 15, 85);
+                doc.text("además de producir contenidos multimedia que combinen audio, vídeo, música, etc.", 15, 88);
+                break;
+            case 3:
+                doc.setFont(undefined, 'bold');
+                doc.text("Creación de contenidos digitales", 15, 79);
+                doc.setFont(undefined, 'normal');
+                doc.text("Eres capaz de crear contenido original como un verdadero artista: combinas elementos de distintas fuentes y en distintos formatos que te ", 15, 82);
+                doc.text("permiten crear contenido atractivo. Además, eres sensible a los derechos de autor de los elementos que empleas y los respeta.", 15, 85);
+                break;
+            case 4:
+                doc.setFont(undefined, 'bold');
+                doc.text("Creación de contenidos digitales", 15, 79);
+                doc.setFont(undefined, 'normal');
+                doc.text("Creas contenido exclusivo cuando te hace falta, empleando distintas herramientas y plataformas, y no te cuesta trabajo hacerlo. Puedes crear ", 15, 82);
+                doc.text("contenido multimedia básico empleando los recursos que tienes a mano, y tienes ganas de mejorar tus actitudes en relación a este aspecto.", 15, 85);
+                break;
+            case 5:
+                doc.setFont(undefined, 'bold');
+                doc.text("Creación de contenidos digitales", 15, 79);
+                doc.setFont(undefined, 'normal');
+                doc.text("Utilizas una gran variedad de herramientas para la creación de contenido, en diferentes formatos, en función de las distintas necesidades", 15, 82);
+                doc.text("que encuentras en tu alumnado. Eres capaz de gestionar toda esta información de forma ágil y compartirla con el resto de la ", 15, 85);
+                doc.text("comunidad educativa.", 15, 88);
+                break;
+            case 6:
+                doc.setFont(undefined, 'bold');
+                doc.text("Creación de contenidos digitales", 15, 79);
+                doc.setFont(undefined, 'normal');
+                doc.text("Eres capaz de modificar programas de código abierto, y entiendes los sistemas y funciones que hay detrás de los programas. Conoces y empleas", 15, 82);
+                doc.text("las distintas licencias de derechos de autor disponibles.", 15, 85);
+                break;
+        }
+
+        // Seguridad
+
+        switch (modulo[3]) {
+            case 1:
+                doc.setFont(undefined, 'bold');
+                doc.text("Seguridad", 15, 93);
+                doc.setFont(undefined, 'normal');
+                doc.text("Sabes que existen amenazas relacionadas con la tecnología (virus, malware,...) pero no sabes distinguirlas ni cómo protegerte de ellas. ", 15, 96);
+                doc.text("Además de recurrir al típico familiar que sabe algo de informática, esta es una buena oportunidad para actualizar tus conocimientos con ", 15, 99);
+                doc.text("un curso de Seguridad en la red.", 15, 102);
+                break;
+
+            case 2:
+                doc.setFont(undefined, 'bold');
+                doc.text("Seguridad", 15, 93);
+                doc.setFont(undefined, 'normal');
+                doc.text("Proteges tus dispositivos empleando estrategias básicas, como un antivirus. Tienes dudas acerca de si esa protección es la más eficaz y, ", 15, 96);
+                doc.text("sobre todo, cómo hacer para proteger a los y las demás al tiempo que te proteges a ti mismo.", 15, 99);
+                break;
+            case 3:
+                doc.setFont(undefined, 'bold');
+                doc.text("Seguridad", 15, 93);
+                doc.setFont(undefined, 'normal');
+                doc.text("Eres consciente de la necesidad de proteger tus datos personales y los de los demás docentes. También sabes que el uso de tecnología en el ", 15, 96);
+                doc.text("aula y en el trabajo puede tener repercusiones en la salud derivadas de su mal uso o abuso. Quieres mejorar tus habilidades en este sentido ", 15, 99);
+                doc.text("y poder trasladarlas de forma adecuada a tu alumnado.", 15, 102);
+                break;
+            case 4:
+                doc.setFont(undefined, 'bold');
+                doc.text("Seguridad", 15, 93);
+                doc.setFont(undefined, 'normal');
+                doc.text("Conoces las repercusiones que el uso de tecnología puede tener para el medio ambiente, y te gustaría minimizarlas. Actualizas tus estrategias", 15, 96);
+                doc.text("de seguridad de forma periódica actualizando las aplicaciones, cambiando las contraseñas, etc.", 15, 99);
+                break;
+            case 5:
+                doc.setFont(undefined, 'bold');
+                doc.text("Seguridad", 15, 93);
+                doc.setFont(undefined, 'normal');
+                doc.text("Vigilas las configuraciones de privacidad de tus datos en los distintos servicios que empleas. Sabes cómo hacer uso de la tecnología de forma ", 15, 96);
+                doc.text("saludable, promueves esas prácticas en tu círculo más cercano, y te gustaría ayudar a tu alumnado a gestionar su identidad digital.", 15, 99);
+                break;
+            case 6:
+                doc.setFont(undefined, 'bold');
+                doc.text("Seguridad", 15, 93);
+                doc.setFont(undefined, 'normal');
+                doc.text("Actualizas de manera frecuente tus estrategias de seguridad, y sabes cómo actuar cuando tu seguridad está comprometida. Mantienes una postura ", 15, 96);
+                doc.text("informada sobre el impacto de la tecnología en la vida diaria, el consumo, etc.", 15, 99);
+                break;
+        }
+
+        // Resolucion de problemas
+
+        switch (modulo[4]) {
+            case 1:
+                doc.setFont(undefined, 'bold');
+                doc.text("Resolución de problemas", 15, 107);
+                doc.setFont(undefined, 'normal');
+                doc.text("Siempre solicitas ayuda cuando necesitas solventar algún problema técnico con tu equipo. Muchas veces estos problemas son muy sencillos y ", 15, 110);
+                doc.text("con muy poco esfuerzo serías capaz de resolver la mayoría de ellos.", 15, 113);
+                break;
+
+            case 2:
+                doc.setFont(undefined, 'bold');
+                doc.text("Resolución de problemas", 15, 107);
+                doc.setFont(undefined, 'normal');
+                doc.text("Conoces algunos problemas recurrentes y los sabes solucionar, porque te han ocurrido varias veces. Te gustaría tener soltura para poder ", 15, 110);
+                doc.text("identificar nuevos problemas o comprender exactamente cómo solucionar lo que ya tienes.", 15, 113);
+                break;
+            case 3:
+                doc.setFont(undefined, 'bold');
+                doc.text("Resolución de problemas", 15, 107);
+                doc.setFont(undefined, 'normal');
+                doc.text("Eres capaz de dar una respuesta creativa a los problemas y en general los resuelves. Cuando no eres capaz, sabes identificar qué está mal ", 15, 110);
+                doc.text("y sabes buscar la ayuda precisa.", 15, 113);
+                break;
+            case 4:
+                doc.setFont(undefined, 'bold');
+                doc.text("Resolución de problemas", 15, 107);
+                doc.setFont(undefined, 'normal');
+                doc.text("Eres capaz de tomar decisiones de forma autónoma a la hora de escoger una herramienta digital para una actividad rutinaria que no te habías ", 15, 110);
+                doc.text("planteado aún. De vez en cuando pruebas nuevas herramientas con el propósito de resolver mejor los problemas a los que te enfrentas.", 15, 113);
+                break;
+            case 5:
+                doc.setFont(undefined, 'bold');
+                doc.text("Resolución de problemas", 15, 107);
+                doc.setFont(undefined, 'normal');
+                doc.text("Fomentas el uso de herramientas de comunicación digitales, por la importancia que cobran para el futuro personal y profesional de tu ", 15, 110);
+                doc.text("alumnado. Eres consciente de la importancia de la identidad digital y tienes estrategias para su gestión que transmites.", 15, 113);
+                break;
+            case 6:
+                doc.setFont(undefined, 'bold');
+                doc.text("Resolución de problemas", 15, 107);
+                doc.setFont(undefined, 'normal');
+                doc.text("Actualizas frecuentemente tus necesidades en lo referente a Competencia Digital Docente. Colaboras de forma proactiva con otro docentes", 15, 110);
+                doc.text("para crear productos creativos e innovadores.", 15, 113);
+                break;
+        }
+
+        //  Area 6
+
+        switch (modulo[5]) {
+            case 1:
+                doc.setFont(undefined, 'bold');
+                doc.text("Prueba", 15, 118);
+                doc.setFont(undefined, 'normal');
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 121); // Aqui Area 6
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 124); // Aqui Area 6
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 127); // Aqui Area 6
+                break;
+
+            case 2:
+                doc.setFont(undefined, 'bold');
+                doc.text("Prueba", 15, 118);
+                doc.setFont(undefined, 'normal');
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 121); // Aqui Area 6
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 124); // Aqui Area 6
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 127); // Aqui Area 6
+                break;
+            case 3:
+                doc.setFont(undefined, 'bold');
+                doc.text("Prueba", 15, 118);
+                doc.setFont(undefined, 'normal');
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 121); // Aqui Area 6
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 124); // Aqui Area 6
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 127); // Aqui Area 6
+                break;
+            case 4:
+                doc.setFont(undefined, 'bold');
+                doc.text("Prueba", 15, 118);
+                doc.setFont(undefined, 'normal');
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 121); // Aqui Area 6
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 124); // Aqui Area 6
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 127); // Aqui Area 6
+                break;
+            case 5:
+                doc.setFont(undefined, 'bold');
+                doc.text("Prueba", 15, 118);
+                doc.setFont(undefined, 'normal');
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 121); // Aqui Area 6
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 124); // Aqui Area 6
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 127); // Aqui Area 6
+                break;
+            case 6:
+                doc.setFont(undefined, 'bold');
+                doc.text("Prueba", 15, 118);
+                doc.setFont(undefined, 'normal');
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 121); // Aqui Area 6
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 124); // Aqui Area 6
+                doc.text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sit amet volutpat odio, vel egestas risus. Aenean consequat sodales sem sit", 15, 127); // Aqui Area 6
+                break;
+        }
+
+
+
+        //añadimos el grafico
+        var canvas = document.getElementById("myChart");
+        var canvasImg = canvas.toDataURL('image/jpeg', 1.0);
+        doc.addImage(canvasImg, 'JPEG', 10, 130, 200, 150);
+
+        //añadimos la ultima pag
+        doc.addPage();
+        doc.addImage(img, 'png', 5, 5, 150, 30);
+
+        doc.setFont(undefined, 'bold');
+        doc.setFontSize(12);
+        doc.text("Consejos para el desarrollo de tu itinerario de formación", 15, 50);
+        doc.setFont(undefined, 'normal');
+        doc.setFontSize(8);
+        doc.text("Las páginas anteriores te ayudarán a desarrollar tu", 15, 55);
+        doc.setFont(undefined, 'bold');
+        doc.text("Competencia Digital", 80, 55);
+        doc.setFont(undefined, 'normal');
+        doc.text("articulando distintos aspectos de la misma. Además, te ", 109, 55);
+        doc.text("recomendamos seguir las siguientes directrices:", 15, 58);
+
+        doc.setFont(undefined, 'bold');
+        doc.text("º", 25, 69);
+        doc.setFont(undefined, 'normal');
+        doc.text("Consulta los descriptores de referencia para la Competencia Digital. Te ayudarán a conocer qué necesitas mejorar.", 28, 69);
+        doc.text("Los encontrarás en la página del DigCom.", 28, 72);
+
+        doc.setFont(undefined, 'bold');
+        doc.text("º", 25, 79);
+        doc.setFont(undefined, 'normal');
+        doc.text("Diseña un itinerario", 28, 79);
+        doc.setFont(undefined, 'bold');
+        doc.text("homogéneo", 53, 79);
+        doc.setFont(undefined, 'normal');
+        doc.text(", en el que no destaquen unas áreas competenciales sobre otras. Consulta con tus ", 69, 79);
+        doc.text("compañeros y compañeras qué formaciones les han funcionado, así como la oferta formativa que te ofrece tu centro de", 28, 82);
+        doc.text("trabajo.", 28, 85);
+
+
+        doc.setFont(undefined, 'bold');
+        doc.text("º", 25, 93);
+        doc.setFont(undefined, 'normal');
+        doc.text("Procura que sea también", 28, 93);
+        doc.setFont(undefined, 'bold');
+        doc.text("posibilitador", 60, 93);
+        doc.setFont(undefined, 'normal');
+        doc.text(" esto es, que ", 77, 93);
+        doc.setFont(undefined, 'bold');
+        doc.text("no esté orientado exclusivamente a aprender a manejar ", 93, 93);
+        doc.text("herramientas concretas", 28, 96);
+        doc.setFont(undefined, 'normal');
+        doc.text(", sino a saber lo que puedes lograr con tecnología en relación con los objetivos que quieres alcanzar", 60, 96);
+
+
+        doc.setFont(undefined, 'bold');
+        doc.text("º", 25, 104);
+        doc.setFont(undefined, 'normal');
+        doc.text("Intenta que tu ruta sea", 28, 104);
+        doc.setFont(undefined, 'bold');
+        doc.text("coherente con metodologías innovadoras", 57, 104);
+        doc.setFont(undefined, 'normal');
+        doc.text(", que no repliquen prácticas que no favorecen el ", 113, 104);
+        doc.text("aprendizaje.", 28, 107);
+
+        doc.setFont(undefined, 'bold');
+        doc.text("º", 25, 115);
+        doc.setFont(undefined, 'normal');
+        doc.text("Para terminar, sé ", 28, 115);
+        doc.setFont(undefined, 'bold');
+        doc.text("coherente con el nuevo rol de docente", 51, 115);
+        doc.setFont(undefined, 'normal');
+        doc.text(", como posibilitador del aprendizaje, y no como mero transmisor", 103, 115);
+        doc.text(" del conocimiento.", 28, 118);
+
+    }
+
+</script>

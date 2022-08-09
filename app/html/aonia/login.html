@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block main %}
+<div id=contenedor_login style="border-radius: 25px; 
+                                background-image: url('public/img/Imagen-bienvenida-sin-texto-Login-hd.png'); 
+                                padding: 20px;
+                                margin-left: 10%;
+                                margin-top: 5%;
+                                padding-top: 5%;
+                                padding-bottom: 5%;
+                                width: 80%;
+                                align-items: center;
+                                align-content: center">
+                                
+	<form method="POST" >
+        <div class="form-group" style="width: 50%; min-width:200px">
+          <label for="exampleInputEmail1">Correo electrónico</label>
+          <input type="text" class="form-control" name="email" id="email" aria-describedby="emailHelp" onchange="saveCredentials()">
+          <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu correo electrónico con nadie más.</small>
+        </div>
+        <div class="form-group" style="width: 50%; min-width:200px">
+          <label for="exampleInputPassword1">Contraseña</label>
+          <input type="password" class="form-control" name="pass" id="pass" onchange="saveCredentials()">
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="saveData" onchange="saveCredentials()">
+          <label class="form-check-label" for="saveData">Guardar los datos de acceso.</label>
+        </div>
+        
+      <div>
+      <p>
+        <button type="submit" class="btn btn-primary" name="action" value="login" style="margin-top: 2%; margin-bottom: 2%; background: linear-gradient(to bottom, #4f6bf5 , #8e86f7); border-radius: 20px; width: 120px; border-style:hidden">Acceder</button>
+        <!---- <a type="submit" class="btn btn-danger" name="action" value="login" href="/resetPass" style="background-color: #FF5F58">¿Has olvidado tu contraseña? Accede aquí</a> -->
+        <p>¿Has olvidado tu contraseña?<a href="/resetPass"> <b>Recupérala ahora</b></a></p>
+        <!--<a type="submit" class="btn btn-secondary" name="action" value="login" href="/registro" style="background-color: #1F2ECD; border-radius: 25px; width: 150px">¿No estás registrado aún?</a>-->
+        <p>¿Aún no estás registrado? <a href="/registro"> <b>Regístrate</b></a></p>
+      </p>
+    </div>
+    </form>
+
+      {% if loginError %}
+      <div class="alert alert-danger mt-3" role="alert">
+      {{loginError | raw}}
+      </div>
+      {% endif %}
+      <script>
+        if(localStorage.getItem('saveData')){
+            document.getElementById("saveData").setAttribute("checked", "");
+            document.getElementById("email").value = localStorage.getItem('email');
+            document.getElementById("pass").value = localStorage.getItem('pass');
+          }
+
+          function saveCredentials() {
+              if(document.getElementById("saveData").checked){
+                localStorage.setItem('saveData', true);
+                localStorage.setItem('email', document.getElementById("email").value);
+                localStorage.setItem('pass', document.getElementById("pass").value);
+              }else{
+                localStorage.clear();
+              }
+          }
+      </script>
+</div>
+{% endblock %}

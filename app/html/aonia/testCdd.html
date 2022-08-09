@@ -1,0 +1,375 @@
+
+
+{% extends extendsFrom == "skeleton" ? "htmlEskeleton.html" : "base.html" %}
+
+
+
+{% block main %}
+<div class="card-body">
+	{% set totalPages = questionGroups | length %}
+	<div class="progress m-3" style="height: 20px;" >
+		<div id="progressbar" class="progress-bar" role="progressbar" style="width: 25%; background: linear-gradient(to bottom, #4f6bf5 , #8e86f7);" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+	</div>
+	
+	<div id="questionsGroups" style="margin-top:5%">
+		{% if area0 %}
+		{% include 'includes/testCddArea0.html' %}
+		{% set totalPages = totalPages + 1 %}
+		{% endif %}
+		
+		{% for questionGroup in questionGroups %}
+		{% set group = loop.index %}
+        <article class="questionGroup" id="group{{group}}" style="display: none;">
+		<h4 class="card-title">{{questionGroup["title"]}}</h4>
+		<P>{{questionGroup["subTitle"]}}</P>
+		{% for question in questionGroup["preguntas"] %}
+			{% set responseNumber = loop.index %}
+			<article class="new-question card card-body mt-3" id="page{{group}}">
+				<h5  class="card-title">{{question["pregunta"]}}</h5>
+				{% set responsesNumber = question["respuestas"] | length %}
+				{% set colSize = 12/responsesNumber %}
+			{% if question["tipo"] == "radio" or question["tipo"] == "checkbox" %}
+					<div class="">
+						{% for response in question["respuestas"] %}
+						<div class="form-group">
+							<div class="form-check form-check-inline">
+								<input 	class="form-check-input" 
+										type="{{question['tipo']}}" 
+										name="respuesta_{{group}}_{{responseNumber}}{{question['tipo'] == 'checkbox' ? '[]' : ''}}" 
+										id="respuesta_{{group}}_{{responseNumber}}_{{response['valor']}}" 
+										value="{{response['valor']}}"
+										onchange="setAction('update')"
+								>
+								<!-- onchange="save('update')" -->
+								<label class="form-check-label" for="respuesta_{{group}}_{{responseNumber}}_{{response['valor']}}">{{response['texto']}}</label>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+			{% endif %}
+		</article>
+		{% endfor %}
+		</article>
+	{% endfor %}
+		<section  class="d-flex justify-content-center mt-3">
+			<button type="button" id="sendButton"  class="btn btn-success btn-lg btn-block disabled" style="display: none; background: linear-gradient(to bottom, #4f6bf5 , #8f87f7); border-radius: 20px; width: 120px; border-style:hidden" onclick="setAction('insert')">Enviar</button>
+		</section>
+	</div>
+</div>
+<nav aria-label="Page navigation">
+	<ul class="pagination justify-content-center" id="pagination">
+		<li class="page-item disabled" onclick="pagination(page-1)" id="paginationPrevious"><a class="page-link" href="#" tabindex="-1" style="background-color: #8f87f7; color: #ffffff";>Anterior</a></li>
+		{% for i in 1..totalPages %}
+		<!--<li class="page-item" onclick="pagination({{i}})" data-toggle="tooltip" data-placement="top" id="paginationPage{{i}}" title="Tienes preguntas sin responder"><a class="page-link" href="#" style="background-color: #e487e4";>{{i}}</a></li> -->
+		<li class="page-item" onclick="pagination({{i}})" data-toggle="tooltip" data-placement="top" id="paginationPage{{i}}"><a class="page-link" href="#" style="background-color: #8f87f7; color: #ffffff";>{{i}}</a></li>
+		{% endfor %}
+
+		<li class="page-item" onclick="pagination(page+1)" id="paginationNext"><a class="page-link" href="#" style="background-color: #8f87f7; color: #ffffff";>Siguiente</a></li>
+		
+	</ul>
+</nav>
+<!-- MODAL (popup) -->
+<div class="modal fade" id="restoreDataModal" tabindex="-1" role="dialog" aria-labelledby="restoreDataModalLabel" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="restoreDataModalLabel">Test empezado</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Usted tiene un test empezado. 
+      </div>
+      <div class="modal-footer" style="display:block" >
+        <button type="button" class="btn btn-success" data-dismiss="modal" style="background: linear-gradient(to bottom, #4f6bf5 , #8e86f7); border-radius: 20px; width: 200px; border-style:hidden">Continuar donde lo dejé</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" style="background: linear-gradient(to bottom, #4f6bf5 , #8e86f7); border-radius: 20px; width: 200px; border-style:hidden" onclick="clearData()">Empezar de nuevo</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="answerAllCuestion" tabindex="-1" role="dialog" aria-labelledby="answerAllCuestionLabel" aria-hidden="false">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="answerAllCuestionLabel">Contesta todas las preguntas</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  Usted debe contestar todas las preguntas. 
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+<style>
+	.disabled {
+		pointer-events: none;
+	}
+</style>
+<script>
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
+	var page = 1; 
+	const totalPages = {{totalPages}};
+	const area0 = {{area0}};
+
+	//var data = {{data | raw}};
+	const dataRaw = '{{data | raw}}';
+	console.log(`dataRaw: ${dataRaw}`);
+	var data = null; 
+	try {
+		data = JSON.parse(dataRaw);
+	} catch (error) {
+		console.error(error);
+		console.error(`Error parseando el JSON de los datos guardados. JSON: ${dataRaw}`);
+		data = false; 
+	}
+	var action = "none"; 
+	console.log(data);
+
+	document.getElementById('questionsGroups').querySelectorAll('input, textarea').forEach(element => {
+		element.setAttribute('onchange','setAction("update")');
+	})
+
+	if(data){
+		
+		//restoreData();
+		//console.log(data["responses"]);
+		if(data["responses"]['area0']){
+			const area0_responses_raw = data["responses"]['area0']//.replaceAll('¬¬', '"');
+			let area0_responses = null;
+			try {
+				area0_responses = JSON.parse(decodeURI(area0_responses_raw));
+			} catch (error) {
+				console.error(error);
+				console.error(`Error parseando el JSON de los datos guardados del Area 0 . JSON: ${area0_responses_raw}`);
+				area0_responses = {};
+			}
+			console.log(area0_responses);
+		for (const responseKey in area0_responses) {
+			if(responseKey.includes('respuesta_0_')){
+				let element = document.getElementById(`${responseKey}_${data["responses"][responseKey]}`);
+				if(element){
+					element.setAttribute("checked", "checked"); 
+				}
+			}else{
+				let element = document.getElementById(responseKey);
+				if(element){
+					element.value = area0_responses[responseKey]; 
+				}
+			}
+		}
+			
+		}
+		for (const responseKey in data["responses"]) {
+			//console.log(data["responses"][responseKey]);
+			let element = document.getElementById(`${responseKey}_${data["responses"][responseKey]}`);
+			if(element){
+				element.setAttribute("checked", "checked"); 
+			}
+		}
+		for (let i = data["page"]+1; i <= totalPages; i++) {
+			document.getElementById("paginationPage"+i).classList.add("disabled");
+		}
+		pagination(data["page"]);
+		setAction('update');
+		$('#restoreDataModal').modal({show:true});
+	}else{
+		clearData();
+	}
+
+	function clearData(){
+		let questions = document.getElementsByTagName("input");
+		for (const question of questions) {
+			question.removeAttribute("checked");
+		}
+		questions = document.getElementsByTagName("textarea");
+		for (const question of questions) {
+			question.value = '';
+		}
+		pagination(1); 
+		for (let i = 2; i <= totalPages; i++) {
+			document.getElementById("paginationPage"+i).classList.add("disabled");
+		}
+	}
+
+	pagination(page); 
+
+	function paginationControl() {
+		let group = document.getElementById("group"+ (area0 ? page - 1 : page) );
+		let inputs = group.querySelectorAll("input");
+		let answerGroupAnswered = {};
+		let result = true; 
+
+		if(area0){
+			result = document.getElementById('comentario').value.length > 150;
+		}
+			inputs.forEach(input => {
+
+				let answerGroup = input.getAttribute("name").split('_')[2];
+				//console.log(answerGroup);
+
+				answerGroupAnswered[answerGroup] = answerGroupAnswered[answerGroup] || input.checked;
+			});
+			for (const key in answerGroupAnswered) {
+				result = result && answerGroupAnswered[key]; 
+			}
+		
+		
+
+		/*if(!result && !showPopup){
+			$('#answerAllCuestion').modal({
+				show: true
+			});
+		}*/
+
+		return result;
+
+	}
+
+	function pagination(newPage) {
+		if(!document.getElementById("paginationPage"+newPage).classList.contains('disabled')){
+			for (let index = area0 ? 0 : 1; index <= (area0 ? totalPages-1 : totalPages); index++) {
+				// Ocultamos todos los grupos de preguntas.
+				document.getElementById(`group${index}`).style.display = "none";
+			}
+
+			document.getElementById("paginationPrevious").classList.remove("disabled");
+			document.getElementById("paginationNext").classList.remove("disabled");
+			document.getElementById("sendButton").style.display = "none";
+
+			document.getElementById("pagination").querySelectorAll('li').forEach(liElement => {
+				liElement.classList.remove("active");
+			});
+
+			if(newPage > 0 && newPage <= totalPages){
+				page = newPage; 
+			}
+
+			let progressBar = document.getElementById("progressbar");
+			let percentage = Math.round((page)/(totalPages)*100);
+			progressBar.style.width = `${percentage}%`;
+			progressBar.innerHTML = `${page}/${totalPages}`;
+			progressBar.setAttribute("aria-valuenow", percentage);
+			if(page == totalPages || !paginationControl(page+1)){
+				document.getElementById("paginationNext").classList.add("disabled");
+				if(page == totalPages)
+					document.getElementById("sendButton").style.display = "block";
+			}else if(page == 1){
+				document.getElementById("paginationPrevious").classList.add("disabled");
+			}
+
+			document.getElementById("paginationPage" + page).classList.add("active");
+			document.getElementById("paginationPage" + page).removeAttribute("title");
+
+			document.getElementById(`group${area0 ? page -1 : page }`).style.display = "block";
+		}
+
+	}
+
+	function saveProgress() {
+		if(action !== 'insert'){
+			save(); 
+		}
+	}
+
+	//window.onbeforeunload = saveProgress;
+	document.addEventListener('visibilitychange', function logData() {
+		console.log(document.visibilityState);
+		if (document.visibilityState === 'hidden') {
+			saveProgress();
+		}
+	});
+
+	function setAction(act) {
+		action = act; 
+		if(action === 'insert'){
+			save();
+		}else if(action === 'update'){
+			if(paginationControl()){
+				if(page === totalPages){
+					document.getElementById("sendButton").classList.remove("disabled");
+				}else{
+					document.getElementById("paginationPage"+(page + 1)).classList.remove("disabled");
+					document.getElementById("paginationNext").classList.remove("disabled");
+				}
+			}
+		}
+	}
+
+
+
+
+	function save() {
+			let questions = document.getElementsByTagName("input");
+			let responses = {};
+			let thereAreResponses = false;
+
+			// Obliga a contestar los radio para pasar de un área a otra
+			for (const question of questions) {
+				let responseId = question.getAttribute("name");  
+				if(!responses[responseId]){
+					responses[responseId]  = ""; 
+				}
+				if(question.checked){
+					responses[responseId] = question.value;
+					thereAreResponses = true;  
+				}
+			}
+			let area0Elements = document.getElementsByClassName('area0');
+			if(area0Elements){
+
+				area0Elements = area0Elements[0].querySelectorAll('textarea');
+
+				responses.area0 = {};
+				let i = 0;
+				let resString = `respuesta_0_${++i}`; 
+				while (responses[resString]) {
+					responses.area0[resString] = responses[resString];
+					resString = `respuesta_0_${i++}`; 
+					delete responses.area0[resString];
+				}
+
+				area0Elements.forEach(area0Element => {
+					responses.area0[area0Element.getAttribute('name')] = area0Element.value;
+				});
+				responses.area0 = encodeURI(JSON.stringify(responses.area0))//.replaceAll('"', '¬¬');
+				//responses.comentario = document.getElementById('comentario').value;
+			}
+			//console.log(responses);
+			if(thereAreResponses){//Evitamos que se guarde un resultado vacío
+				if(action === 'update'){
+					/*send({data:JSON.stringify({responses, page})}, action, () => {
+						console.log("Retultado guardado");
+					});*/
+					let body = {
+						action,
+						data: JSON.stringify({responses, page})
+					};
+					let headers = {
+						type: 'application/json'
+					};
+					let blob = new Blob([JSON.stringify(body)], headers);
+					navigator.sendBeacon(window.location.href, blob);
+				}else if(action === 'insert'){
+					if(paginationControl()){
+						send({responses:JSON.stringify(responses), area0}, action, (id) => {
+							window.location = "/informe/"+id; // Este código lleva al usuario al ultimo informe que ha hecho
+						});
+					}
+
+				}
+			}
+
+	}
+	{% include "tools/send.js" %}
+
+</script>
+{% endblock %}

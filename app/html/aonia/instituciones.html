@@ -1,0 +1,22 @@
+{% extends "extends/crudTable.html" %}
+{% block title %}Instituciones{% endblock %}
+{% block botonAnadir %}Añadir nueva institucion{% endblock %}
+{% block tituloAnadir %}Añadir nueva institucion{% endblock %}
+{% block tituloEditar %}Editar centro{% endblock %}
+{% block thead %}
+<th data-field="state" data-checkbox="true"></th>
+<th scope="col" data-sortable="true" data-field="id">Id</th>
+<th scope="col" data-sortable="true" data-field="nombre" data-filter-control="input">Institución</th>
+{% endblock %}
+{% block addRow %}
+  row.id = ``+row.id;
+{% endblock %}
+
+{% block modalbody %}
+<div class="form-group row">
+  <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+  <div class="col-sm-10">
+    <input type="text" class="form-control" id="nombre" placeholder="Nombre de la institución">
+  </div>
+</div>
+{% endblock %}

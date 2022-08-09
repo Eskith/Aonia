@@ -1,0 +1,10 @@
+header{
+    background-color: #502ebc;   
+}
+#tablaNiveles tr > td:last-child {
+    padding: 50px;
+}
+#progressbar{
+    margin-left: 0px !important;
+}
+body { color: #5263cc !important;}

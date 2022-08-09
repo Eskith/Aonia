@@ -1,0 +1,128 @@
+<?php 
+
+$stringResponses = "
+A A A A1
+A A B A2
+A A C A2
+A A D A1
+A B B B1
+A B C B1
+A B D A1
+A C C C1
+A C D A1
+A D D A1
+B B B B1
+B B C B2
+B B D A1
+B C C C1
+B C D A1
+B D D A1
+C C C C2
+C C D A2
+C D D A1
+D D D A1
+A A A A A1
+A A A B A2
+A A A C A2
+A A A D A1
+A A B B A2
+A A B C A2
+A A B D A2
+A A C C B1
+A A C D A2
+A A D D A1
+A B B B B1
+A B B C B1
+A B B D A2
+A B C C B2
+A B C D A2
+A B D D A1
+A C C C C1
+A C C D A2
+A C D D A1
+A D D D A1
+B B B B B1
+B B B C B2
+B B B D B1
+B B C C B2
+B B C D B1
+B B D D A1
+B C C C C1
+B C C D B1
+B C D D A1
+B D D D A1
+C C C C C2
+C C C D B2
+C C D D A1
+C D D D A1
+D D D D A1
+A A A A A A A1
+A A A A A B A1
+A A A A A C A1
+A A A A A D A1
+A A A A B B A2
+A A A A B C A2
+A A A A B D A2
+A A A A C C A2
+A A A A C D A2
+A A A A D D A1
+A A A B B B B1
+A A A B B C B1
+A A A B B D A2
+A A A B C C B1
+A A A B C D A2
+A A A B D D A2
+A A A C C C B1
+A A A C C D A2
+A A A C D D A2
+A A A D D D A1
+A A B B B B B1
+A A B B B C B1
+A A B B B D A2
+A A B B C C B1
+A A B B C D A2
+A A B B D D A2
+A A B C C C B2
+A A B C C D A2
+A A B C D D A2
+A A B D D D A1
+A A C C C C C1
+A A C D D D A1
+A A D D D D A1
+A B B B B B B1
+A B B B B C B1
+A B B B B D B1
+A B B B C C B2
+A B B B C D B1
+A B B B D D A2
+A B B C C C C1
+A B B C C D B1
+A B B C D D A2
+A B B D D D A1
+A B C C C C C1
+A B C C C D B2
+A B C C D D A2
+A B C D D D A1
+A B D D D D A1
+A C C C C C C1
+A C C C C D C1
+A C C C D D A2
+A D D D D D A1
+B B B B C C B2
+B B B B C D B2
+B B B B D D A2
+B B B C C C B2
+B B B C C D B2
+B B B C D D A2
+B B C C C C C1
+B B C C C D B2
+B B C C D D A2
+B C C C C C C1
+B C C C C D C1
+B C C C D D A2
+B C C D D D A1
+C C C C C C C2
+C C C C C D C2
+C C C C D D A2
+D D D D D D A1
+";

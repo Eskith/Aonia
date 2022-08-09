@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+{% block main %}
+
+<div class="container d-flex justify-content-center flex-column align-items-center" style="background-color: #ffffff; border-radius:40px; width: 70%; min-width:200px; margin-top:5%; padding-top: 5%; padding-bottom: 5%;" >
+    <form method="POST" id="formData" onsubmit="javascript: return false;" style="width: inherit;">
+    <section id="datos-personales" class="mt-3"></section>
+      <h5>Datos personales</h5>
+      <br>
+      <div class="form-group">
+        <label for="nombre">Nombre *</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" required value="{{docente ? docente['nombre'] : ''}}">
+        <div class="invalid-feedback" id="invalid-feedback-nombre">El nombre debe contener al menos 3 letras.</div>
+      </div>
+      <div class="form-group">
+        <label for="apellidos">Apellidos *</label>
+        <input type="text" class="form-control" id="apellidos" name="apellidos" required value="{{docente ? docente['apellidos'] : ''}}">
+        <div class="invalid-feedback" id="invalid-feedback-apellidos">Los apellidos deben contener al menos 3 letras.</div>
+      </div>
+      <div class="form-group">
+        <label for="edad" >Edad</label>
+        <input type="number" class="form-control" id="edad" name="edad" min="18" max="70"  value="{{docente ? docente['edad'] : 0}}">
+        <div class="invalid-feedback" id="invalid-feedback-edad">La edad no puede ser menor de 18 ni mayor de 67 años</div>
+      </div>
+    </section>
+    <section id="centros" class="mt-3">
+      <br>
+      <h5>¿Perteneces a un centro educativo?</h5>
+      <div class="form-row">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="buscarCentro" id="buscarCentroSi" value="true" onChange="showCentrosF(this)">
+          <label class="form-check-label" for="inlineRadio1">Sí {{centro['centro_id']}}</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="buscarCentro" id="buscarCentroNo" value="false" onChange="showCentrosF(this)">
+          <label class="form-check-label" for="inlineRadio2">No</label>
+        </div>
+      </div>
+      <section id="showCentros" class="mt-3">
+        <div class="form-row">
+          <div class="form-group col-md-3" id="buscadorCentros">
+            <label for="postalCode">Código postal del centro educativo</label>
+            <input type="number" class="form-control" id="codigoPostal" min="10000" max="99999" onkeyup="buscarCentroF()">
+          </div>
+          <div class="form-group col-md-1" style="position: relative;" id="buscadorCentrosBoton">
+            <button class="btn btn-primary" onclick="buscarCentroF()" style="position: absolute;bottom: 0;">Buscar</button>
+          </div>
+          <div class="form-group col-md-8" id="buscadorCentrosSeleccion">
+            <label for="inputState">Centro educativo</label>
+            <select id="centrosSelect" class="form-control" >
+              <option selected value="{{centro ? centro['id'] : '1'}}">{{centro ? centro['nombre'] : "Sin centro educativo"}}</option>
+            </select>
+          </div>
+        </div>
+        <div id="centrosInfo" class="alert alert-info mt-3" role="alert"  style="display: none;">
+          ¿No encuentras tu centro en las lista? Ponte en contacto con <a href="mailto:soporte@aonialearning.com">soporte@aonialearning.com</a> para que lo añadan.
+        </div>
+        <div id="centrosError" class="alert alert-danger mt-3" role="alert"  style="display: none;">
+          No se han encontrado centros educativos para el código postal introducido. Ponte en contacto con <a href="mailto:soporte@aonialearning.com">soporte@aonialearning.com</a> para que lo añadan.
+        </div>
+        <div class="invalid-feedback" id="invalid-feedback-centro">Debes seleccionar un centro. Si no encuentras el tuyo, selecciona que no perteneces a un centro educativo y ponte en contacto con <a href="mailto:soporte@aonialearning.com">soporte@aonialearning.com</a> para que lo añadan.</div>
+      </section>
+    </section>
+    <section id="etapas" class="mt-3">
+        <h5>¿En qué etapas trabajas?</h5>
+        {% for etapa in etapas %}
+        <div class="form-check">
+            <input class="form-check-input etapas" name="etapas[]" type="checkbox" value="{{etapa['id']}}" id="etapas-{{etapa['id']}}" {{ docente ? etapa['id'] in docente['etapas_id'] ? 'checked' : ''}}  >
+            <label class="form-check-label" for="etapas-{{etapa['id']}}">{{etapa['nombre']}}</label>
+        </div>
+        {% endfor %}
+        <div class="invalid-feedback" id="invalid-feedback-etapas">Debes seleccionar al menos una etapa</div>
+    </section>
+    <section id="areas" class="mt-3">
+        <br>
+        <h5>¿En qué áreas trabajas normalmente?</h5>
+        {% for area in areas %}
+        <div class="form-check">
+            <input class="form-check-input" name="area" type="radio" value="{{area['id']}}" id="area-{{area['id']}}" {{ docente ? docente['area_id'] == area['id'] ? 'checked' : ''}} required>
+            <label class="form-check-label" for="area-{{area['id']}}">{{area['nombre']}}</label>
+        </div>
+        {% endfor %}
+        <!--
+        <div class="form-check">
+            <input class="form-check-input" name="area" type="radio" value="other" id="area-{{area['id']}}">
+              <label class="form-check-label" for="area-{{area['id']}}">Otra: <input type="text" name="area-otra" class="form-control" id="areaOtros" placeholder="Escribe aquí el área"></label>
+          </div>
+          -->
+        <div class="invalid-feedback" id="invalid-feedback-area">Debes seleccionar al menos un área</div>
+    </section>
+    <section class="mt-3 d-flex justify-content-center">
+        <div>
+            <button type="submit" class="btn btn-success" name="action" value="save" onclick="save()" style="background: linear-gradient(to bottom, #4f6bf5 , #8e86f7); border-radius: 20px; width: 200px; border-style:hidden">Guardar</button>
+        </div>
+    </section>
+  </form>
+</div>
+
+<script>
+    let centro = `{{centro['nombre']}}`;
+    let centro_id = {{centro ? centro['id'] : '1'}}; 
+    const cambiarDeCentro = {{cambioDeCentro}};
+    
+    if(centro_id !== 1){
+      let buscarCentroSi =  document.getElementById('buscarCentroSi');
+      buscarCentroSi.click();
+      document.getElementById('showCentros').style.display = 'block';
+      if(!cambiarDeCentro){
+        let buscadorCentros = document.getElementById("buscadorCentros");
+        let buscadorCentrosBoton = document.getElementById("buscadorCentrosBoton");
+        let buscadorCentrosSeleccion = document.getElementById("buscadorCentrosSeleccion");
+        let centrosSelect = document.getElementById("centrosSelect");
+        buscadorCentros.style.display = 'none';
+        buscadorCentrosBoton.style.display = 'none';
+        buscarCentroSi.parentElement.parentElement.style.display = 'none';
+        buscadorCentrosSeleccion.classList.remove('col-md-8');
+        buscadorCentrosSeleccion.classList.add('col-md-12');
+        centrosSelect.insertAdjacentHTML('afterend', `<small id="centrosSelect" class="form-text text-muted">En este momento no es posible modificar el centro educativo. Ponte en contacto con administración para cambiarlo.</small>`);
+
+
+        const inputAux = document.createElement('input');
+        inputAux.setAttribute('style','display: none;');
+        inputAux.setAttribute('value', centro_id);
+        inputAux.setAttribute('id','centrosSelect');
+        document.body.appendChild(inputAux); 
+
+        const input = document.createElement('input');
+
+        // <input type="number" class="" id="codigoPostal" min="10000" max="99999" onkeyup="buscarCentroF()">
+        input.setAttribute('type','text');
+        input.setAttribute('class','form-control');
+        input.setAttribute('value', centro);
+        input.setAttribute('readonly','');
+
+        centrosSelect.parentElement.replaceChild(input,centrosSelect);
+
+      }
+
+    }else{
+      document.getElementById('buscarCentroNo').click();
+      document.getElementById('showCentros').style.display = 'none'; 
+      function showCentrosF(element) {
+        let display = 'none';
+        if(element.value == 'true'){
+          display = 'block';
+        }
+
+        document.getElementById('showCentros').style.display = display; 
+      }
+      showCentrosF(document.getElementById('buscarCentroSi')); 
+      showCentrosF(document.getElementById('buscarCentroNo')); 
+    }
+
+    document.getElementById('formData').addEventListener('onSubmit', event => event.preventDefault());
+    
+
+    function buscarCentroF() {
+      let codigoPostal = document.getElementById('codigoPostal').value;
+      let data = {};
+      data.codigoPostal = codigoPostal;
+
+      let centrosInfo = document.getElementById("centrosInfo");
+      let centrosError = document.getElementById("centrosError");
+      let centrosSelect = document.getElementById("centrosSelect");
+      let html = `<option selected value="{{centro ? centro['id'] : '1'}}">{{centro ? centro['nombre'] : "Sin centro"}}</option>`;
+      centrosSelect.innerHTML = html; 
+
+      centrosError.style.display = 'none';
+      centrosInfo.style.display = 'none';
+
+      if(codigoPostal && codigoPostal.length == 5 ){
+        send({data}, 'getCentros', data => {
+          console.log(data);
+          hrml = `<option selected value="1">Sin centro educativo</option>`;
+          if(data){
+            if(data && data.ok){
+              console.log(data.centros);
+              if(data.centros && data.centros.length){
+                data.centros.forEach(centro => {
+                  html += `<option value="${centro.id}">${centro.nombre}</option>`
+                });
+                centrosSelect.innerHTML = html; 
+                /*var event = document.createEvent('MouseEvents');
+                event.initMouseEvent('mousedown', true, true, window);
+                centrosSelect.dispatchEvent(event);*/
+                centrosSelect.click();
+                centrosInfo.style.display = 'block';
+              }else{
+                centrosError.style.display = 'block';
+              }
+            }else{
+              centrosError.style.display = 'block';
+            }
+          }
+        });
+      }else{
+        centrosSelect.innerHTML = html; 
+      }
+      
+    }
+    
+    function save(event) {
+      let data = {};
+      let error = false;
+
+      //console.log(document.getElementsByClassName('invalid-feedback'));
+      // Ocultamos todas las clases
+
+      for (const element of document.getElementsByClassName('invalid-feedback')) {
+        element.style.display = 'none';
+      }
+
+      const formData = new FormData(document.getElementById('formData'))
+      data.nombre = formData.get('nombre');
+
+      if(data.nombre.length < 3){
+        document.getElementById('invalid-feedback-nombre').style.display = 'block';
+        error = true;
+      }
+      data.apellidos = formData.get('apellidos');
+      if(data.apellidos.length < 3){
+        document.getElementById('invalid-feedback-apellidos').style.display = 'block';
+        error = true;
+      }
+      data.edad = formData.get('edad');
+      if(!data.edad || data.edad < 18 || data.edad > 67){
+        document.getElementById('invalid-feedback-edad').style.display = 'block';
+        error = true;
+      }
+      data.etapas = formData.getAll('etapas[]');
+      if(data.etapas.length === 0){
+        document.getElementById('invalid-feedback-etapas').style.display = 'block';
+        error = true;
+      }
+      data.area_id = formData.get('area');
+      if(!data.area_id){
+        document.getElementById('invalid-feedback-area').style.display = 'block';
+        error = true;
+      }
+
+      if(document.getElementById('buscarCentroSi').checked && document.getElementById('centrosSelect').value == 1){
+        document.getElementById('invalid-feedback-centro').style.display = 'block';
+        error = true;
+      }
+
+      data.centro_id = document.getElementById('buscarCentroSi').checked ?  document.getElementById('centrosSelect').value : 1; 
+      console.log(data);
+      if(!error){
+        send({data}, 'save', data => {
+          console.log(data);
+          if(data){
+            /*try {
+              data = JSON.parse(data);
+            } catch (error) {
+              console.error(error);
+              data = false; 
+            }*/
+
+            if(data && data.ok){
+              showNotification('Los datos de tu perfil se han actualizado correctamente.', 'Perfil actualizado correctamente', 'success');
+              setTimeout(() => {
+                window.location.href = '/';
+              }, 1000);
+            }else{
+              showNotification('Ha ocurrido un error al modificar el perfil, actualiza la página e inténtalo de nuevo.', 'Error al actualizar el perfil', 'error');
+              //location.reload();
+            }
+
+          }
+        })
+      }
+      
+      return false; 
+
+    }
+    {% include "tools/send.js" %}
+</script>
+{% endblock %}

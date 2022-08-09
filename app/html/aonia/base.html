@@ -1,0 +1,72 @@
+{% extends "htmlEskeleton.html" %}
+{% block html %}
+<style>
+	#menu{ background-color: #d7ccfd !important}
+	
+</style>
+<header>
+	<div class="container" style="padding: 0.5%">
+		<h1> <img id="logo" src="/public/img/Logo-Aonia-Educacion-interfaz-test-hd.png" height="50"> </h1>
+	</div>
+	{% if user and user.isLogued() %}
+
+	<section id="menu" class=" bg-dark" style="background-color: #502ebc !important; padding-bottom: 0.5%;">
+		<nav class="container navbar navbar-expand-md bg-dark navbar-dark"style="background-color: #502ebc !important;">
+		  <a class="navbar-brand" href="/">Inicio</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav d-flex justify-content-between">
+				{% if user.hasRole('docente') %}
+
+				<li class="nav-item">
+					<a class="nav-link" href="/informe">Ver informes</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/testCDD">Hacer nuevo test</a>
+				</li>
+				<li class="nav-item" style="right: 0; position: relative;">
+					<a class="nav-link" href="/perfil">Mi perfil</a>
+				</li>
+				{% elseif user.hasRole('administrador') %}
+				<li class="nav-item">
+					<a class="nav-link" href="/instituciones">Instituciones</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/centros">Centros</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/docentes">Docentes</a>
+				</li>
+				{% endif %}
+				
+				<li class="nav-item" style="right: 0; position: absolute;">
+					<form method="POST">
+						<button type="submit" class="btn btn-danger" name="action" value="logout" style="background: linear-gradient(to bottom, #a460e4 , #8e86f7); border-radius: 20px; width: 130px; border-style:hidden">Desconectarse</button>
+					</form>
+				</li>
+			</ul>
+		  </div>  
+		</nav>
+	</section>
+	{% endif %}
+</header>
+	<main class="container">
+		{% block main %}
+		
+		{% endblock %}
+	</main>
+{% block javaScriptEnd %}{% endblock %}
+<script>
+
+	let menuLinks = document.getElementById('collapsibleNavbar').querySelectorAll('a');
+
+	for (const link of menuLinks) {
+		if(window.location.pathname.toLocaleLowerCase().indexOf(link.getAttribute('href').toLocaleLowerCase()) !== -1){
+			link.classList.add("active");
+		}
+	}
+</script>
+
+{% endblock %}

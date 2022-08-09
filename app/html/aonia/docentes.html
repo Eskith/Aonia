@@ -1,0 +1,214 @@
+{% extends "extends/crudTable.html" %}
+{% block title %}Docentes{% endblock %}
+{% block botonAnadir %}Añadir nuevo docente{% endblock %}
+{% block tituloAnadir %}Añadir nuevo docente{% endblock %}
+{% block tituloEditar %}Editar docente{% endblock %}
+{% block toolbar %}
+<button type="button" class="btn btn-primary mr-3" data-toggle="modal" data-target="#modal-carga_masiva">Carga Masiva de docentes</button>
+{% endblock %}
+{% block thead %}
+<th data-field="state" data-checkbox="true"></th>
+<th scope="col" data-sortable="true" data-field="id">Id</th>
+<th scope="col" data-sortable="true" data-field="email" data-filter-control="input">Email</th>
+<th scope="col" data-sortable="true" data-field="nombre" data-filter-control="input">Nombre</th>
+<th scope="col" data-sortable="true" data-field="apellidos" data-filter-control="input">Apellidos</th>
+<th scope="col" data-sortable="true" data-field="centro" data-filter-control="input">Centro</th>
+<th scope="col" data-sortable="true" data-field="estado" data-filter-control="select">Estado</th>
+<th scope="col" data-sortable="true" data-field="fechaUltimoTest">Fecha último test Cdd</th>
+{% endblock %}
+{% block onloadJs %}
+  $('#tabla').bootstrapTable('hideColumn', 'nombre');
+  $('#tabla').bootstrapTable('hideColumn', 'apellidos');
+{% endblock %}
+{% block addRow %}
+    row.centro = `<a href="/docentes/centro/${row.centro_id}" title="${row.centro}">${row.centro}</a>`
+{% endblock %}
+{% block modalbody %}
+<div class="form-group row">
+    <label for="nombre" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="email" placeholder="Email">
+    </div>
+</div>
+<div class="form-group row">
+    <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="nombre" placeholder="Nombre del docente">
+    </div>
+</div>
+<div class="form-group row">
+    <label for="nombre" class="col-sm-2 col-form-label">Apellidos</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="apellidos" placeholder="Apellidos del docente">
+    </div>
+</div>
+<div class="form-group row">
+    <label for="nombre" class="col-sm-2 col-form-label">Centro</label>
+    <div class="col-sm-10">
+        <select  id="centro" class="form-control advancedAutoComplete" autocomplete="off">
+            <option selected value="{{centro ? centro['id'] : '1'}}">{{centro ? centro['nombre'] : "Sin centro educativo"}}</option>
+        </select>
+        <!--<input type="text" class="form-control advancedAutoComplete" id="centro" placeholder="">
+        <input type="hidden" class="form-control" id="centro_id" placeholder="" hidden>-->
+        <div class="invalid-feedback" id="centro-invalid-feedback">No se ha seleccionado ningún centro</div>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="nombre" class="col-sm-2 col-form-label">Cambiar Contraseña</label>
+    <div class="col-sm-10">
+        <div class="form-inline" style="display: flex;justify-content: space-between;">
+            <input type="password" class="form-control" style="width: 49%;" id="pass1" placeholder="Introduce la nueva contraseña">
+            <input type="password" class="form-control" style="width: 49%;" id="pass2" placeholder="Repite la contraseña de nuevo">
+        </div>
+        <div class="invalid-feedback" id="change-pass-invalid-feedback">Las contraseñas no coinciden</div>
+    </div>
+</div>
+{% endblock %}
+
+{% block bottom %}
+
+<div class="modal fade" id="modal-carga_masiva" tabindex="-1" role="dialog" aria-labelledby="modal-carga_masiva-title" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-carga_masiva-title">Cargar docentes de manera masiva</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="modal-body" id="modal-carga_masiva-body">
+                    <div class="form-group row">
+                        <label for="nombre" class="col-sm-2 col-form-label">Centro</label>
+                        <div class="col-sm-10">
+                            <select  id="cargaMasivaCentro" class="form-control advancedAutoComplete" autocomplete="off">
+                                <option selected value="{{centro ? centro['id'] : '1'}}">{{centro ? centro['nombre'] : "Sin centro educativo"}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="custom-file mb-3">
+                        <input type="file" class="custom-file-input" id="docentesFile" name="docentesFile" required accept=".csv">
+                        <label class="custom-file-label" for="docentesFile">Elige un archivo</label>
+                    </div>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary"   onclick="importData()" data-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/xcash/bootstrap-autocomplete@v2.3.7/dist/latest/bootstrap-autocomplete.min.js"></script>
+
+<script>
+    //const centros = JSON.parse(`{{centros|raw}}`);
+
+    let autoComplete = $('.advancedAutoComplete').autoComplete({
+        resolver: 'custom',
+        minLength: 4,
+        noResultsText: 'No se encuentran centros',
+        //bootstrapVersion: 4,
+        select: (evt, centro_id) => console.log(centro_id),
+        events: {
+                search: (text, callback) => {
+                        send({text}, 'searchCentros', centros => {
+                            callback(centros);
+                            /*console.log(data);
+                            if(data.ok){
+                            }else{
+                                showNotification('No se han podido obtener los centros', 'Error al obtener los centros', 'error');
+                            }*/
+                        });
+                        /*
+                        console.log(text);
+                        centros = centros.filter(centro => centro.text.toLowerCase().includes(text.toLowerCase()));
+                        callback(centros);
+                        */
+                },
+                select : (evt, centro_id) => console.log(centro_id),
+        },
+});
+autoComplete.select((evt, centro_id) => document.getElementById("centro_id").value = centro_id);
+
+function importData() {
+    let centroId = document.getElementById(`cargaMasivaCentro`).parentNode.querySelector('input[type="hidden"').value;
+    console.log(centroId);
+    if(!centroId && centroId !== 0){
+        showNotification('Debes seleccionar un centro a donde importar los usuarios', 'No se ha seleccionado centro', 'error');
+    }else{
+        let file = document.getElementById(`docentesFile`).files[0];
+        console.log(file);
+        if(!file){
+            showNotification('Debes subir un archivo con los docentes a importar', 'No se ha sibido archivo', 'error');
+        }else{
+            var data = new FormData()
+            data.append('file', file);
+            data.append('centroId', centroId);
+            data.append('action', 'subidaMasiva');
+            showNotification('Carga marsiva iniciada', 'La carga masiva de docentes se ha iniciado', 'success');
+
+            fetch(window.location.href, { // Your POST endpoint
+                method: 'POST',
+                headers: {
+                    //"Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: data // This is your file object
+            }).then(
+                response => response.text() // if the response is a JSON object
+            ).then(
+                text => {
+                    showNotification('La carga masiva de docentes ha finalizado', 'Carga marsiva finalizada', 'success');
+                    console.log(text);
+                    try {
+                        let data = JSON.parse(text);
+                        if(!Array.isArray(data)){
+                            data = data.data;
+                        }
+                    } catch (error) {
+                        console.error(error);
+                        showNotification('Los datos recibidos del servidor no son correctos', 'Error en los datos recibidos del servidor', 'error')
+
+                    }
+                } // Handle the success response object
+            ).catch(
+                error => console.log(error) // Handle the error response object
+            );
+
+
+        }
+        
+    }
+    
+}
+</script>
+
+{% block saveDataValidation %}
+<script>
+  function saveDataValidation(dataToSend){
+    let cpif = document.getElementById("change-pass-invalid-feedback");
+    cpif.style.display = 'none';
+    if(dataToSend.pass1 != dataToSend.pass2){
+        cpif.style.display = 'block';
+        showNotification('Las contraseñas no coinciden.', 'Erro al actualizar los datos', 'Error');
+        return false;
+    }else{
+        dataToSend.pass = dataToSend.pass1;
+        delete dataToSend.pass1;
+        delete dataToSend.pass2;
+    }
+
+    let centroIdElement = document.getElementById("centro").closest('.form-group').querySelector('input[type="hidden"]');
+    let cif = document.getElementById("centro-invalid-feedback");
+    cif.style.display = 'none';
+    if(!centroIdElement || !centroIdElement.value){
+        cif.style.display = 'block';
+        return false;
+    }else{
+        dataToSend.centro_id = centroIdElement.value;
+    }
+    
+    return true;
+  }
+</script>
+{% endblock %}
+{% endblock %}
